@@ -27,9 +27,21 @@
     .jagged-path:hover { stroke: #f56565; }
     .vine-path { stroke: #38a169; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growVine 3s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(104, 211, 145, 0.7)); }
     .vine-path:hover { stroke: #38a169; }
-    .coin, .leaf { position: absolute; animation-duration: 5s; animation-iteration-count: infinite; }
-    .coin { background: #f6ad55; width: 8px; height: 8px; border-radius: 50%; animation: fadeCoin 4s infinite; }
-    .leaf { width: 12px; height: 12px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat; animation: floatLeaf 6s infinite; }
+    .coin, .leaf { position: absolute; animation-iteration-count: infinite; pointer-events: none; }
+    .coin { 
+      background: #f6ad55; 
+      width: 12px; 
+      height: 12px; 
+      border-radius: 50%; 
+      box-shadow: 0 0 6px rgba(246, 173, 85, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5); 
+      transform-origin: center;
+    }
+    .leaf { 
+      width: 12px; 
+      height: 12px; 
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat; 
+      animation: floatLeaf 6s infinite; 
+    }
     .coin:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
     .coin:nth-child(2) { top: 40%; left: 50%; animation-delay: 1s; }
     .leaf:nth-child(1) { top: 15%; left: 70%; animation-delay: 0s; }
@@ -38,11 +50,54 @@
     @keyframes glowIcon { 0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 3px rgba(104, 211, 145, 0.5)); } 50% { transform: scale(1.2) rotate(10deg); filter: drop-shadow(0 0 8px rgba(104, 211, 145, 0.8)); } }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(3deg); } 75% { transform: translateX(3px) rotate(-3deg); } }
     @keyframes growVine { 0%, 100% { stroke-dashoffset: 200; } 50% { stroke-dashoffset: 0; } }
-    @keyframes fadeCoin { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 0.8; transform: translateY(-15px); } }
+    @keyframes fadeCoinForOtherSections { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 0.8; transform: translateY(-15px); } }
     @keyframes floatLeaf { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(45deg); } }
     /* Calculator Styles */
-    .calculator { background: #ffffff; border: 2px solid #68d391; }
+    .calculator { background: #ffffff; border: 2px solid #68d391; position: relative; overflow: hidden; }
     .calc-result { background: #f0fff4; border-left: 4px solid #68d391; }
+    /* Realistic Coin Physics for Calculator Section */
+    #calculator .coin { 
+      width: 14px; 
+      height: 14px; 
+      animation: fallCoin 3.5s infinite ease-in-out; 
+    }
+    #calculator .coin:nth-child(1) { top: -30px; left: 15%; animation: fallCoin1 3.8s infinite ease-in-out; animation-delay: 0s; }
+    #calculator .coin:nth-child(2) { top: -30px; left: 35%; animation: fallCoin2 3.2s infinite ease-in-out; animation-delay: 0.6s; }
+    #calculator .coin:nth-child(3) { top: -30px; left: 55%; animation: fallCoin3 4s infinite ease-in-out; animation-delay: 1.2s; }
+    #calculator .coin:nth-child(4) { top: -30px; left: 75%; animation: fallCoin4 3.6s infinite ease-in-out; animation-delay: 1.8s; }
+    #calculator .coin:nth-child(5) { top: -30px; left: 95%; animation: fallCoin5 3.4s infinite ease-in-out; animation-delay: 2.4s; }
+    @keyframes fallCoin1 {
+      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(400px) translateX(10px) rotate(180deg); opacity: 0.9; }
+      75% { transform: translateY(450px) translateX(8px) rotate(200deg); opacity: 0.7; } /* Subtle bounce */
+      100% { transform: translateY(500px) translateX(5px) rotate(220deg); opacity: 0; }
+    }
+    @keyframes fallCoin2 {
+      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(400px) translateX(-15px) rotate(-150deg); opacity: 0.85; }
+      75% { transform: translateY(430px) translateX(-12px) rotate(-170deg); opacity: 0.65; }
+      100% { transform: translateY(480px) translateX(-10px) rotate(-190deg); opacity: 0; }
+    }
+    @keyframes fallCoin3 {
+      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(400px) translateX(5px) rotate(240deg); opacity: 0.95; }
+      75% { transform: translateY(460px) translateX(3px) rotate(260deg); opacity: 0.75; }
+      100% { transform: translateY(520px) translateX(2px) rotate(280deg); opacity: 0; }
+    }
+    @keyframes fallCoin4 {
+      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(400px) translateX(-8px) rotate(-200deg); opacity: 0.9; }
+      75% { transform: translateY(440px) translateX(-6px) rotate(-220deg); opacity: 0.7; }
+      100% { transform: translateY(490px) translateX(-4px) rotate(-240deg); opacity: 0; }
+    }
+    @keyframes fallCoin5 {
+      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(400px) translateX(12px) rotate(160deg); opacity: 0.8; }
+      75% { transform: translateY(450px) translateX(10px) rotate(180deg); opacity: 0.6; }
+      100% { transform: translateY(500px) translateX(8px) rotate(200deg); opacity: 0; }
+    }
+    /* Apply fadeCoin animation to coins in other sections */
+    #solution .coin, #how .coin { animation: fadeCoinForOtherSections 5s infinite; }
     /* Section Backgrounds */
     .section-bg-offwhite { background: #f8faf5; }
     .section-bg-pale { background: #f0fff4; }
@@ -54,6 +109,212 @@
     .survey-input:focus, .calc-input:focus { outline: none; border-color: #68d391; box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.2); }
     /* Headings */
     h2, h3 { color: #2f855a; }
+    /* Enhanced Realistic Crack Physics for "The Broken System" Section */
+    #problem {
+      position: relative;
+      overflow: hidden;
+      background: #f8faf5 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 10L10 15L15 5L20 20L25 5L30 25L35 5L40 15L45 25L50 5L55 20L60 5L65 15L70 25L75 5L80 20L85 5L90 15L95 25L100 5" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/><path d="M0 50L5 55L10 45L15 60L20 45L25 65L30 45L35 55L40 65L45 45L50 60L55 45L60 55L65 65L70 45L75 60L80 45L85 55L90 65L95 45L100 60" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/><path d="M0 90L10 95L15 85L20 100L25 85L30 95L35 85L40 90L45 100L50 85L55 95L60 85L65 90L70 100L75 85L80 95L85 85L90 90L95 100L100 85" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/></svg>') repeat;
+      background-size: 150% 150%;
+      animation: crackShift 10s ease-in-out infinite alternate;
+    }
+    #problem::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0L5 10L10 5L15 15L20 0L25 20L30 5L35 10L40 20L45 5L50 15L55 0L60 10L65 20L70 5L75 15L80 0L85 10L90 20L95 5L100 15" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M0 30L10 35L15 25L20 40L25 25L30 35L35 25L40 30L45 40L50 25L55 35L60 25L65 30L70 40L75 25L80 35L85 25L90 30L95 40L100 25" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M0 60L5 65L10 55L15 70L20 55L25 75L30 55L35 65L40 75L45 55L50 70L55 55L60 65L65 75L70 55L75 70L80 55L85 65L90 75L95 55L100 70" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/></svg>') repeat;
+      background-size: 200% 200%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.2;
+      animation: crackPulse 8s ease-in-out infinite alternate;
+    }
+    #problem::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(229, 62, 62, 0.05), transparent);
+      pointer-events: none;
+      z-index: 1;
+      animation: crackGlow 6s ease-in-out infinite alternate;
+    }
+    #problem .problem-cards .card {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #e53e3e;
+      border-style: dashed;
+      background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 10L30 30L50 10L70 30L90 10" fill="none" stroke="%23e53e3e" stroke-width="1" opacity="0.2"/><path d="M10 50L30 70L50 50L70 70L90 50" fill="none" stroke="%23e53e3e" stroke-width="1" opacity="0.2"/></svg>') repeat;
+      background-size: 50% 50%;
+    }
+    #problem .problem-cards .card::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, transparent 30%, rgba(229, 62, 62, 0.15) 70%);
+      transform: rotate(10deg);
+      pointer-events: none;
+      animation: shatterSpread 3s ease-in-out infinite;
+    }
+    #problem .problem-cards .card::after {
+      content: '💔';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+      opacity: 0.5;
+      animation: crackJitter 1.2s ease-in-out infinite;
+    }
+    #problem .price-flow .price-card {
+      position: relative;
+      border: 2px dashed #e53e3e;
+      background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M5 5L15 15L25 5L35 15L45 5" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M5 25L15 35L25 25L35 35L45 25" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/></svg>') repeat;
+      background-size: 40% 40%;
+    }
+    #problem .price-flow .price-card:nth-child(5)::before {
+      content: '💸';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+      opacity: 0.6;
+      animation: breakLoss 1.5s ease-in-out infinite;
+    }
+    #problem .price-flow .price-card:nth-child(5)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(229, 62, 62, 0.2), transparent 70%);
+      pointer-events: none;
+      animation: crackRipple 2.5s ease-in-out infinite;
+    }
+    /* Debris Particles for Realism */
+    #problem .debris {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #e53e3e;
+      border-radius: 50%;
+      opacity: 0.4;
+      z-index: 2;
+      pointer-events: none;
+    }
+    #problem .debris:nth-child(1) { top: 20%; left: 15%; animation: debrisFloat 4s ease-in-out infinite; }
+    #problem .debris:nth-child(2) { top: 50%; left: 40%; animation: debrisFloat 5s ease-in-out infinite 0.5s; }
+    #problem .debris:nth-child(3) { top: 70%; left: 60%; animation: debrisFloat 4.5s ease-in-out infinite 1s; }
+    #problem .debris:nth-child(4) { top: 30%; left: 80%; animation: debrisFloat 3.5s ease-in-out infinite 1.5s; }
+    /* Animations for Crack Physics */
+    @keyframes crackShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 10% 10%; }
+    }
+    @keyframes crackPulse {
+      0% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.02); }
+      100% { opacity: 0.2; transform: scale(1); }
+    }
+    @keyframes crackGlow {
+      0% { opacity: 0.05; }
+      50% { opacity: 0.15; }
+      100% { opacity: 0.05; }
+    }
+    @keyframes shatterSpread {
+      0% { transform: rotate(10deg) translate(0, 0); opacity: 0.15; }
+      50% { transform: rotate(12deg) translate(5px, 5px); opacity: 0.25; }
+      100% { transform: rotate(10deg) translate(0, 0); opacity: 0.15; }
+    }
+    @keyframes crackJitter {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-2px, 2px) rotate(5deg); }
+      75% { transform: translate(2px, -2px) rotate(-5deg); }
+    }
+    @keyframes breakLoss {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.3); opacity: 0.8; }
+    }
+    @keyframes crackRipple {
+      0% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.1); }
+      100% { opacity: 0.2; transform: scale(1); }
+    }
+    @keyframes debrisFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+      50% { transform: translateY(-10px) rotate(20deg); opacity: 0.6; }
+    }
+    /* New Animations for "How JODO Works" Section */
+    #how {
+      position: relative;
+      overflow: hidden;
+    }
+    .step-number {
+      animation: glowIcon 2s infinite;
+    }
+    .step-icon {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+      animation: iconBounce 1.5s infinite ease-in-out;
+    }
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .step {
+      opacity: 0;
+      animation: stepReveal 1s ease-out forwards;
+    }
+    .step:nth-child(1) { animation-delay: 0.2s; }
+    .step:nth-child(2) { animation-delay: 0.4s; }
+    .step:nth-child(3) { animation-delay: 0.6s; }
+    .step:nth-child(4) { animation-delay: 0.8s; }
+    .step:nth-child(5) { animation-delay: 1.0s; }
+    .step:nth-child(6) { animation-delay: 1.2s; }
+    @keyframes stepReveal {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    #how .coin:nth-child(odd) { animation: fadeCoinForOtherSections 5s infinite; }
+    #how .leaf:nth-child(even) { animation: floatLeaf 7s infinite; }
+    /* Connecting Vines Between Steps */
+    .steps-container {
+      position: relative;
+    }
+    .vine-connector {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      animation: vineGrow 2s ease-in-out forwards;
+    }
+    .vine-connector path {
+      stroke: #38a169;
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: growVine 2.5s ease-in-out forwards;
+      filter: drop-shadow(0 0 3px rgba(104, 211, 145, 0.5));
+    }
+    .vine-connector:nth-child(2) { animation-delay: 0.4s; }
+    .vine-connector:nth-child(3) { animation-delay: 0.8s; }
+    .vine-connector:nth-child(4) { animation-delay: 1.2s; }
+    .vine-connector:nth-child(5) { animation-delay: 1.6s; }
+    .vine-connector:nth-child(6) { animation-delay: 2.0s; }
+    @keyframes vineGrow {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
     /* Mobile-specific adjustments */
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
@@ -89,11 +350,76 @@
       .social-links { gap: 0.5rem; }
       .coin, .leaf { display: none; }
       [data-aos] { opacity: 1 !important; transform: none !important; }
+      /* Adjusted Crack Effect for Mobile */
+      #problem {
+        background-size: 300% 300%;
+      }
+      #problem::before {
+        background-size: 400% 400%;
+        animation-duration: 12s;
+      }
+      #problem .debris {
+        width: 4px;
+        height: 4px;
+      }
+      #problem .problem-cards .card::after,
+      #problem .price-flow .price-card:nth-child(5)::before {
+        font-size: 1rem;
+      }
+      /* Adjusted Vine Connectors for Mobile */
+      .vine-connector {
+        display: none; /* Hide vines on mobile to simplify layout */
+      }
+      /* Simplified Coin Physics for Mobile */
+      #calculator .coin:nth-child(n+4) { display: none; } /* Show only 3 coins on mobile */
+      #calculator .coin { width: 10px; height: 10px; }
+      #calculator .coin:nth-child(1) { animation: fallCoinMobile 3s infinite ease-in-out; }
+      #calculator .coin:nth-child(2) { animation: fallCoinMobile 2.8s infinite ease-in-out; animation-delay: 0.4s; }
+      #calculator .coin:nth-child(3) { animation: fallCoinMobile 3.2s infinite ease-in-out; animation-delay: 0.8s; }
+      @keyframes fallCoinMobile {
+        0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+        50% { transform: translateY(300px) translateX(5px) rotate(120deg); opacity: 0.8; }
+        75% { transform: translateY(320px) translateX(4px) rotate(140deg); opacity: 0.6; }
+        100% { transform: translateY(350px) translateX(3px) rotate(160deg); opacity: 0; }
+      }
+    }
+    /* Desktop-specific Vine Positioning */
+    @media (min-width: 641px) {
+      .vine-connector-1-2 {
+        top: 150px;
+        left: 30%;
+        width: 200px;
+        height: 100px;
+      }
+      .vine-connector-2-3 {
+        top: 300px;
+        left: 30%;
+        width: 200px;
+        height: 100px;
+      }
+      .vine-connector-3-4 {
+        top: 150px;
+        left: 60%;
+        width: 200px;
+        height: 100px;
+      }
+      .vine-connector-4-5 {
+        top: 300px;
+        left: 60%;
+        width: 200px;
+        height: 100px;
+      }
+      .vine-connector-5-6 {
+        top: 450px;
+        left: 45%;
+        width: 200px;
+        height: 100px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
+  <!-- Hero Section (unchanged) -->
   <header class="hero flex flex-col items-center justify-center px-4 py-12 text-white sm:py-16" data-aos="fade-up">
     <div class="hero-content text-center max-w-lg sm:max-w-2xl">
       <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
@@ -105,7 +431,7 @@
     </div>
   </header>
 
-  <!-- Sticky Navigation -->
+  <!-- Sticky Navigation (unchanged) -->
   <nav class="sticky-nav py-3 bg-white sm:py-4">
     <ul class="flex justify-center gap-4 text-base font-semibold sm:gap-10 sm:text-lg">
       <li><a href="#problem" class="text-gray-700 hover:text-green-500">Problem</a></li>
@@ -117,71 +443,40 @@
     </ul>
   </nav>
 
-<!-- Problem Section -->
-<section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-  <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Broken System</h2>
-
-  <!-- Problem Cards -->
-  <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-      🌾 <strong>10 Million Farmers</strong> earn barely 25% of retail price & remain trapped in debt.
+  <!-- Problem Section (unchanged) -->
+  <section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <div class="debris"></div><div class="debris"></div><div class="debris"></div><div class="debris"></div>
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12 relative z-10">The Broken System</h2>
+    <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6 relative z-10">
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
+        🌾 <strong>10 Million Farmers</strong> earn barely 25% of retail price & remain trapped in debt.
+      </div>
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
+        💰 <strong>4 Middlemen</strong> take most of the value — adding zero contribution.
+      </div>
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
+        👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3× and get days-old vegetables.
+      </div>
     </div>
-    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-      💰 <strong>4 Middlemen</strong> take most of the value — adding zero contribution.
+    <div class="price-flow flex flex-col justify-center items-center gap-4 mt-10 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-12 sm:text-lg overflow-x-auto scroll-smooth relative z-10">
+      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="100">
+        <span class="text-3xl font-bold text-green-600">₹15/kg</span><br>
+        <span class="text-sm font-normal text-gray-600">What farmers get 😢</span>
+      </div>
+      <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="150">→</div>
+      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="200">
+        <span class="text-3xl font-bold text-blue-600">₹60/kg</span><br>
+        <span class="text-sm font-normal text-gray-600">What families pay 💸</span>
+      </div>
+      <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="250">→</div>
+      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="300">
+        <span class="text-3xl font-bold text-orange-600">₹45/kg</span><br>
+        <span class="text-sm font-normal text-gray-600">Lost to middlemen 😡</span>
+      </div>
     </div>
-    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-      👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3× and get days-old vegetables.
-    </div>
-  </div>
+  </section>
 
-  <!-- Price Flow Visualization -->
-  <div class="price-flow flex flex-col justify-center items-center gap-4 mt-10 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-12 sm:text-lg overflow-x-auto scroll-smooth">
-    
-    <!-- Farmer -->
-    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-green-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="100">
-      <span class="text-3xl font-bold text-green-600">₹15/kg</span><br>
-      <span class="text-sm font-normal text-gray-600">What farmers get 😢</span>
-    </div>
-
-    <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="150">→</div>
-
-    <!-- Consumer -->
-    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-blue-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="200">
-      <span class="text-3xl font-bold text-blue-600">₹60/kg</span><br>
-      <span class="text-sm font-normal text-gray-600">What families pay 💸</span>
-    </div>
-
-    <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="250">→</div>
-
-    <!-- Middlemen Loss -->
-    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-orange-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="300">
-      <span class="text-3xl font-bold text-orange-600">₹45/kg</span><br>
-      <span class="text-sm font-normal text-gray-600">Lost to middlemen 😡</span>
-    </div>
-  </div>
-</section>
-
-<style>
-  /* Smooth horizontal scroll for mobile */
-  .price-flow::-webkit-scrollbar {
-    height: 6px;
-  }
-  .price-flow::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-  }
-  .price-card {
-    flex-shrink: 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .price-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-</style>
-
-
-  <!-- Solution Section -->
+  <!-- Solution Section (unchanged) -->
   <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
     <div class="coin"></div><div class="coin"></div>
     <div class="leaf"></div><div class="leaf"></div>
@@ -215,91 +510,105 @@
         <p class="text-sm sm:text-base text-white">Farmer: ₹25/kg</p>
         <p class="text-sm sm:text-base text-white">JODO + Logistics: ₹10/kg</p>
         <p class="text-sm sm:text-base text-white">Families: 35/Kg</p>
-        <p class="text-sm sm:text-base text-white"></p>
       </div>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <!-- How It Works -->
-<section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-  <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
-  
-  <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
-    
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
-      <div class="step-number">1️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
-        <p class="text-sm sm:text-base">
-          Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.  
-          Each contributes ₹100, creating a <strong>₹10,000 local working capital</strong>.  
-          👉 A self-funded, trust-based community economy.
-        </p>
+  <!-- How It Works Section (unchanged) -->
+  <section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
+    <div class="coin"></div><div class="coin"></div>
+    <div class="leaf"></div><div class="leaf"></div>
+    <div class="coin"></div><div class="leaf"></div>
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
+    <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
+      <svg class="vine-connector vine-connector-1-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
+      </svg>
+      <svg class="vine-connector vine-connector-2-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
+      </svg>
+      <svg class="vine-connector vine-connector-3-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
+      </svg>
+      <svg class="vine-connector vine-connector-4-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
+      </svg>
+      <svg class="vine-connector vine-connector-5-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
+      </svg>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
+        <div class="step-number">1️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">👥</span>
+          <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
+          <p class="text-sm sm:text-base">
+            Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.  
+            Each contributes ₹100, creating a <strong>₹10,000 local working capital</strong>.  
+            👉 A self-funded, trust-based community economy.
+          </p>
+        </div>
+      </div>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="200">
+        <div class="step-number">2️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">🧑‍💼</span>
+          <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
+          <p class="text-sm sm:text-base">
+            A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.  
+            💰 Earns <strong>₹15K–₹20K/month</strong> by growing the group’s active families.
+          </p>
+        </div>
+      </div>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="300">
+        <div class="step-number">3️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">📱</span>
+          <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
+          <p class="text-sm sm:text-base">
+            Families place orders via <strong>App or WhatsApp</strong>.  
+            Orders are aggregated and finalized <strong>48 hours in advance</strong> for zero-waste procurement.
+          </p>
+        </div>
+      </div>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="100">
+        <div class="step-number">4️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">🌾</span>
+          <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
+          <p class="text-sm sm:text-base">
+            JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.  
+            Ensuring fair prices and faster cash flow to the roots of India’s food chain.
+          </p>
+        </div>
+      </div>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="200">
+        <div class="step-number">5️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">🚚</span>
+          <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
+          <p class="text-sm sm:text-base">
+            A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,  
+            cutting last-mile delivery costs and reducing waste.
+          </p>
+        </div>
+      </div>
+      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="300">
+        <div class="step-number">6️⃣</div>
+        <div class="step-content text-left">
+          <span class="step-icon">🛒</span>
+          <h3 class="text-base font-semibold sm:text-lg">Family Pickup & Refill</h3>
+          <p class="text-sm sm:text-base">
+            Each family walks 50–100 meters to collect their order, pay locally,  
+            and <strong>refill the working capital</strong> — keeping the JODO cycle continuously revolving.
+          </p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="200">
-      <div class="step-number">2️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
-        <p class="text-sm sm:text-base">
-          A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.  
-          💰 Earns <strong>₹15K–₹20K/month</strong> by growing the group’s active families.
-        </p>
-      </div>
-    </div>
-
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="300">
-      <div class="step-number">3️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
-        <p class="text-sm sm:text-base">
-          Families place orders via <strong>App or WhatsApp</strong>.  
-          Orders are aggregated and finalized <strong>48 hours in advance</strong> for zero-waste procurement.
-        </p>
-      </div>
-    </div>
-
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="100">
-      <div class="step-number">4️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
-        <p class="text-sm sm:text-base">
-          JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.  
-          Ensuring fair prices and faster cash flow to the roots of India’s food chain.
-        </p>
-      </div>
-    </div>
-
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="200">
-      <div class="step-number">5️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
-        <p class="text-sm sm:text-base">
-          A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,  
-          cutting last-mile delivery costs and reducing waste.
-        </p>
-      </div>
-    </div>
-
-    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="300">
-      <div class="step-number">6️⃣</div>
-      <div class="step-content text-left">
-        <h3 class="text-base font-semibold sm:text-lg">Family Pickup & Refill</h3>
-        <p class="text-sm sm:text-base">
-          Each family walks 50–100 meters to collect their order, pay locally,  
-          and <strong>refill the working capital</strong> — keeping the JODO cycle continuously revolving.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-  <!-- Calculator Section -->
-  <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <!-- Calculator Section with Realistic Coin Physics -->
+  <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
+    <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div>
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Calculate Your JODO Savings 💰</h2>
     <p class="text-base mb-6 sm:text-lg sm:mb-8">Enter your monthly vegetable spend to see how much you can save with JODO!</p>
     <div class="calc-card calculator p-6 rounded-lg shadow-lg max-w-md mx-auto" data-aos="zoom-in">
@@ -316,7 +625,7 @@
     </div>
   </section>
 
-  <!-- Survey Section -->
+  <!-- Survey Section (unchanged) -->
   <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
     <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestion via WhatsApp.</p>
@@ -330,7 +639,7 @@
     </div>
   </section>
 
-  <!-- Impact Section -->
+  <!-- Impact Section (unchanged) -->
   <section id="impact" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Impact</h2>
     <div class="impact-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
@@ -349,7 +658,7 @@
     </div>
   </section>
 
-  <!-- Join Section -->
+  <!-- Join Section (unchanged) -->
   <section id="join" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">Join the <span class="highlight">JODO Movement</span></h2>
     <div class="join-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
@@ -371,7 +680,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer (unchanged) -->
   <footer class="bg-green-800 text-white py-8 px-4 text-center" data-aos="fade-up">
     <p class="mb-2 text-sm sm:text-base">📧 Email: <a href="mailto:contact@jodo.in" class="text-orange-400 hover:text-orange-300">contact@jodo.in</a></p>
     <p class="mb-2 text-sm sm:text-base">📱 WhatsApp: <a href="https://wa.me/918500742671" target="_blank" class="text-orange-400 hover:text-orange-300">+91 85007 42671</a></p>
