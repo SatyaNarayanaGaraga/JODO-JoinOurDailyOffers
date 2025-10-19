@@ -4,21 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JODO - Join Our Daily Offers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Georgia&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; overflow-anchor: auto; font-size: 1rem; }
     .highlight { color: #f6ad55; font-weight: 700; }
-    .hero { background: linear-gradient(135deg, #2f855a, #68d391); display: flex; align-items: center; }
-    .hero-image { position: relative; overflow: hidden; }
-    .hero-image img { transition: transform 0.5s ease; width: 100%; height: auto; }
-    .hero-image img:hover { transform: scale(1.1); }
+    .hero { background: linear-gradient(135deg, #2f855a, #68d391); display: flex; align-items: center; justify-content: center; }
     .sticky-nav { position: sticky; top: 0; z-index: 1000; background: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .sticky-nav a.active { color: #68d391; border-bottom: 2px solid #68d391; }
-    .card, .solution-card, .impact-card, .join-card, .calc-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background: #ffffff; border: 1px solid #e6f0ea; }
-    .card:hover, .solution-card:hover, .impact-card:hover, .join-card:hover, .calc-card:hover { transform: translateY(-10px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+    .card, .solution-card, .impact-card, .join-card, .calc-card, .price-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background: #ffffff; border: 1px solid #e6f0ea; }
+    .card:hover, .solution-card:hover, .impact-card:hover, .join-card:hover, .calc-card:hover, .price-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
     .step-number { background: #f6ad55; color: #ffffff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+    .price-arrow { color: #2f855a; font-size: 2rem; font-weight: bold; transition: transform 0.3s ease; }
+    .price-arrow:hover { transform: scale(1.2); }
+    .solution-card { position: relative; overflow: hidden; background: linear-gradient(145deg, #e53e3e, #7f1d1d); border-radius: 1rem; }
+    .solution-card.green { background: linear-gradient(145deg, #68d391, #1a4731); }
+    .solution-card h3 { font-family: 'Georgia', serif; }
+    .chain-icon { font-size: 2rem; display: inline-block; animation: pulseFade 2s infinite; }
+    .glow-icon { font-size: 2rem; display: inline-block; animation: glowIcon 2s infinite; }
+    .jagged-path { animation: shake 0.6s infinite; stroke: #f56565; }
+    .jagged-path:hover { stroke: #f56565; }
+    .vine-path { stroke: #38a169; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growVine 3s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(104, 211, 145, 0.7)); }
+    .vine-path:hover { stroke: #38a169; }
+    .coin, .leaf { position: absolute; animation-duration: 5s; animation-iteration-count: infinite; }
+    .coin { background: #f6ad55; width: 8px; height: 8px; border-radius: 50%; animation: fadeCoin 4s infinite; }
+    .leaf { width: 12px; height: 12px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat; animation: floatLeaf 6s infinite; }
+    .coin:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+    .coin:nth-child(2) { top: 40%; left: 50%; animation-delay: 1s; }
+    .leaf:nth-child(1) { top: 15%; left: 70%; animation-delay: 0s; }
+    .leaf:nth-child(2) { top: 50%; left: 30%; animation-delay: 2s; }
+    @keyframes pulseFade { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
+    @keyframes glowIcon { 0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 3px rgba(104, 211, 145, 0.5)); } 50% { transform: scale(1.2) rotate(10deg); filter: drop-shadow(0 0 8px rgba(104, 211, 145, 0.8)); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(3deg); } 75% { transform: translateX(3px) rotate(-3deg); } }
+    @keyframes growVine { 0%, 100% { stroke-dashoffset: 200; } 50% { stroke-dashoffset: 0; } }
+    @keyframes fadeCoin { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 0.8; transform: translateY(-15px); } }
+    @keyframes floatLeaf { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(45deg); } }
     /* Calculator Styles */
     .calculator { background: #ffffff; border: 2px solid #68d391; }
     .calc-result { background: #f0fff4; border-left: 4px solid #68d391; }
@@ -37,21 +58,20 @@
     @media (max-width: 640px) {
       body { font-size: 0.875rem; }
       .hero { flex-direction: column; padding: 2rem 1rem; }
+      .hero-content { max-width: 100%; }
       .hero-content h1 { font-size: 2rem; }
       .hero-content p { font-size: 0.875rem; }
       .hero-cta { flex-direction: column; gap: 0.5rem; }
-      .hero-image { margin-top: 1rem; }
-      .hero-image img { max-width: 80%; margin: 0 auto; }
       .sticky-nav { padding: 0.5rem 0; }
       .sticky-nav ul { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
       .sticky-nav a { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
       .section { padding: 2rem 0.75rem; }
       .section h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-      .problem-cards, .solution-comparison, .impact-cards, .join-cards { flex-direction: column; gap: 0.5rem; }
-      .card, .solution-card, .impact-card, .join-card, .calc-card { padding: 1rem; max-width: 100%; }
-      .problem-prices { flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
-      .problem-prices div { font-size: 0.875rem; }
-      .problem-prices span { font-size: 0.75rem; }
+      .problem-cards, .solution-comparison, .impact-cards, .join-cards, .price-flow { flex-direction: column; gap: 0.5rem; }
+      .card, .solution-card, .impact-card, .join-card, .calc-card, .price-card { padding: 1rem; max-width: 100%; }
+      .price-flow div { font-size: 0.875rem; }
+      .price-flow span { font-size: 0.75rem; }
+      .price-arrow, .chain-icon, .glow-icon, .jagged-path, .vine-path { font-size: 1.5rem; width: 150px; height: 40px; }
       .steps-container { gap: 1rem; flex-direction: column; align-items: center; }
       .step { flex-direction: row; gap: 0.5rem; max-width: 100%; }
       .step-number { width: 24px; height: 24px; font-size: 0.875rem; }
@@ -67,23 +87,21 @@
       .footer { padding: 1.5rem 0.75rem; }
       .footer p, .footer a { font-size: 0.75rem; }
       .social-links { gap: 0.5rem; }
-      [data-aos] { opacity: 1 !important; transform: none !important; } /* Disable AOS on mobile */
+      .coin, .leaf { display: none; }
+      [data-aos] { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
 <body>
   <!-- Hero Section -->
-  <header class="hero flex flex-col items-center justify-center px-4 py-12 text-white sm:flex-row sm:py-16" data-aos="fade-up">
-    <div class="hero-content text-center max-w-lg sm:text-left">
+  <header class="hero flex flex-col items-center justify-center px-4 py-12 text-white sm:py-16" data-aos="fade-up">
+    <div class="hero-content text-center max-w-lg sm:max-w-2xl">
       <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
       <p class="text-base mb-6 sm:text-xl sm:mb-8">Transform India's food system & earn by empowering your community</p>
-      <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-start">
+      <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-center">
         <a href="#join" class="btn font-semibold">Join Waitlist</a>
         <a href="https://wa.me/918500742671" class="btn font-semibold" target="_blank">Call Our Team</a>
       </div>
-    </div>
-    <div class="hero-image mt-6 sm:mt-0 sm:ml-12" data-aos="fade-left" data-aos-delay="200">
-      <img src="https://cdn.pixabay.com/photo/2016/03/26/13/09/market-1282237_1280.jpg" alt="Fresh Market" class="rounded-2xl max-w-full h-auto">
     </div>
   </header>
 
@@ -113,84 +131,140 @@
         👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3x, get old vegetables
       </div>
     </div>
-    <div class="problem-prices flex flex-col justify-center gap-3 mt-6 font-semibold text-base sm:flex-row sm:gap-4 sm:mt-8 sm:text-lg">
-      <div>₹15/kg<br><span class="text-sm font-normal">What farmer gets</span></div>
-      <div class="text-xl sm:text-2xl">→</div>
-      <div>₹60/kg<br><span class="text-sm font-normal">What you pay</span></div>
-      <div class="text-xl sm:text-2xl">→</div>
-      <div>₹45/kg<br><span class="text-sm font-normal">Middlemen take</span></div>
+    <div class="price-flow flex flex-col justify-center gap-3 mt-6 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-8 sm:text-lg">
+      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="100">
+        <span class="text-2xl text-red-600">₹15/kg</span><br>
+        <span class="text-sm font-normal">What farmers earn 😢</span>
+      </div>
+      <div class="price-arrow self-center" data-aos="fade-up" data-aos-delay="200">→</div>
+      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="300">
+        <span class="text-2xl font-bold text-green-800">₹35/kg</span><br>
+        <span class="text-sm font-normal">What you pay 💸</span>
+      </div>
+      <div class="price-arrow self-center" data-aos="fade-up" data-aos-delay="400">→</div>
+      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="500">
+        <span class="text-2xl italic text-orange-600">₹50/kg</span><br>
+        <span class="text-sm font-normal">Middlemen take 😡</span>
+      </div>
     </div>
   </section>
 
   <!-- Solution Section -->
-  <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">The <span class="highlight">JODO Solution</span></h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">Remove middlemen, connect communities to farmers, <strong>save money and earn together!</strong></p>
+  <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
+    <div class="coin"></div><div class="coin"></div>
+    <div class="leaf"></div><div class="leaf"></div>
+    <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8 font-georgia">The <span class="highlight">JODO Solution</span></h2>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">Empowering farmers & communities</p>
     <div class="solution-comparison flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="solution-card bg-red-50 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-left">
-        <h3 class="text-lg font-semibold text-red-800 mb-3 sm:text-xl sm:mb-4">❌ Without JODO</h3>
-        <p>Farmer: ₹15/kg → Middlemen: ₹45/kg → Family Pays: ₹60/kg</p>
-        <p class="mt-2">😢 Farmer profit: ₹3,000/week</p>
-        <p>😡 Family overpays: ₹32,500/month</p>
+      <div class="solution-card p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="zoom-out">
+        <h3 class="text-lg font-semibold text-white mb-3 sm:text-xl sm:mb-4">❌ Without JODO</h3>
+        <svg class="jagged-path mx-auto mb-3" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 25L50 40L90 10L130 40L170 10L190 25" stroke="#e53e3e" stroke-width="4"/>
+        </svg>
+        <div class="flex justify-center gap-2 mb-3 sm:gap-4">
+          <span class="chain-icon">🌾😢</span>
+          <span class="chain-icon">💰😡</span>
+          <span class="chain-icon">👨‍👩‍👧‍👦😡</span>
+        </div>
+        <p class="text-sm sm:text-base text-white">Farmer: ₹15/kg</p>
+        <p class="text-sm sm:text-base text-white">Middlemen: ₹35/kg</p>
+        <p class="text-sm sm:text-base text-white">Family: ₹50/kg</p>
       </div>
-      <div class="solution-card bg-green-50 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-right">
-        <h3 class="text-lg font-semibold text-green-800 mb-3 sm:text-xl sm:mb-4">✅ With JODO</h3>
-        <p>Farmer: ₹39/kg → JODO Platform 3.5% fee → 100 Families pay ₹45/kg</p>
-        <p class="mt-2">😊 Farmer profit: ₹15,237/week (5x more!)</p>
-        <p>💰 Families save: ₹10,000/month (31%)</p>
-        <p><strong>Community Leaders</strong> can earn ₹15-20K/month from just ₹500 investment per family!</p>
+      <div class="solution-card green p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold text-white mb-3 sm:text-xl sm:mb-4">✅ With JODO</h3>
+        <svg class="vine-path mx-auto mb-3" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 25C50 10 150 40 190 25" stroke="#2f855a" stroke-width="4"/>
+        </svg>
+        <div class="flex justify-center gap-2 mb-3 sm:gap-4">
+          <span class="glow-icon">🌾😊</span>
+          <span class="glow-icon">👨‍👩‍👧‍👦💚</span>
+          <span class="glow-icon">👥💰</span>
+        </div>
+        <p class="text-sm sm:text-base text-white">Farmer: ₹25/kg</p>
+        <p class="text-sm sm:text-base text-white">JODO + Logistics: ₹10/kg</p>
+        <p class="text-sm sm:text-base text-white">Families: 35/Kg</p>
+        <p class="text-sm sm:text-base text-white"></p>
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
-    <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
-        <div class="step-number">1</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
-          <p class="text-sm sm:text-base">100 families join → <span class="highlight">₹500 each</span> → ₹50,000 working capital</p>
-        </div>
-      </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="200">
-        <div class="step-number">2</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
-          <p class="text-sm sm:text-base">Trusted resident manages pickup → earns <span class="highlight">₹15-20K/month</span></p>
-        </div>
-      </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="300">
-        <div class="step-number">3</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
-          <p class="text-sm sm:text-base">Via App/WhatsApp → aggregated → pre-orders 48h ahead</p>
-        </div>
-      </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="100">
-        <div class="step-number">4</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
-          <p class="text-sm sm:text-base">Fresh harvest → guaranteed payment within 24h</p>
-        </div>
-      </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="200">
-        <div class="step-number">5</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
-          <p class="text-sm sm:text-base">500kg to pickup point → no expensive last-mile delivery</p>
-        </div>
-      </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="300">
-        <div class="step-number">6</div>
-        <div class="step-content text-left">
-          <h3 class="text-base font-semibold sm:text-lg">Family Pickup</h3>
-          <p class="text-sm sm:text-base">Walk 100m → pay & refill working capital → weekly cycle</p>
-        </div>
+  <!-- How It Works -->
+<section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
+  
+  <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
+    
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
+      <div class="step-number">1️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
+        <p class="text-sm sm:text-base">
+          Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.  
+          Each contributes ₹500, creating a <strong>₹50,000 local working capital</strong>.  
+          👉 A self-funded, trust-based community economy.
+        </p>
       </div>
     </div>
-  </section>
+
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="200">
+      <div class="step-number">2️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
+        <p class="text-sm sm:text-base">
+          A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.  
+          💰 Earns <strong>₹15K–₹20K/month</strong> by growing the group’s active families.
+        </p>
+      </div>
+    </div>
+
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="300">
+      <div class="step-number">3️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
+        <p class="text-sm sm:text-base">
+          Families place orders via <strong>App or WhatsApp</strong>.  
+          Orders are aggregated and finalized <strong>48 hours in advance</strong> for zero-waste procurement.
+        </p>
+      </div>
+    </div>
+
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="100">
+      <div class="step-number">4️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
+        <p class="text-sm sm:text-base">
+          JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.  
+          Ensuring fair prices and faster cash flow to the roots of India’s food chain.
+        </p>
+      </div>
+    </div>
+
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="200">
+      <div class="step-number">5️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
+        <p class="text-sm sm:text-base">
+          A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,  
+          cutting last-mile delivery costs and reducing waste.
+        </p>
+      </div>
+    </div>
+
+    <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="300">
+      <div class="step-number">6️⃣</div>
+      <div class="step-content text-left">
+        <h3 class="text-base font-semibold sm:text-lg">Family Pickup & Refill</h3>
+        <p class="text-sm sm:text-base">
+          Each family walks 50–100 meters to collect their order, pay locally,  
+          and <strong>refill the working capital</strong> — keeping the JODO cycle continuously revolving.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Calculator Section -->
   <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
@@ -213,7 +287,7 @@
   <!-- Survey Section -->
   <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Enter your suggestion below and share it directly via WhatsApp.</p>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestion via WhatsApp.</p>
     <div class="max-w-md mx-auto">
       <div class="mb-4">
         <input type="text" id="suggestion-input" placeholder="Enter your suggestion" class="survey-input">
