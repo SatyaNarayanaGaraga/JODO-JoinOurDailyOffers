@@ -42,6 +42,7 @@
       .step-content p { font-size: 0.9rem; }
       .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
       .calc-input { font-size: 1rem; }
+      .survey-cta { flex-direction: column; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -67,6 +68,7 @@
       <li><a href="#problem" class="text-gray-700 hover:text-green-500">Problem</a></li>
       <li><a href="#solution" class="text-gray-700 hover:text-green-500">Solution</a></li>
       <li><a href="#how" class="text-gray-700 hover:text-green-500">How It Works</a></li>
+      <li><a href="#calculator" class="text-gray-700 hover:text-green-500">Calculator</a></li>
       <li><a href="#impact" class="text-gray-700 hover:text-green-500">Impact</a></li>
       <li><a href="#join" class="text-gray-700 hover:text-green-500">Join</a></li>
     </ul>
@@ -186,7 +188,7 @@
   <!-- Survey Section -->
   <section id="survey" class="section py-12 px-4 bg-cyan-50 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your thoughts below.</p>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Use the form below or share via WhatsApp.</p>
     <div class="max-w-md mx-auto">
       <div class="mb-4">
         <input type="text" id="name" placeholder="Your Name" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
@@ -194,7 +196,10 @@
       <div class="mb-4">
         <textarea id="suggestion" placeholder="Your Suggestion" rows="4" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"></textarea>
       </div>
-      <button id="submit-suggestion" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Submit</button>
+      <div class="survey-cta flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <button id="submit-suggestion" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Submit</button>
+        <a href="https://wa.me/918500742671?text=I%20have%20a%20suggestion%20for%20JODO:%20" target="_blank" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Send via WhatsApp</a>
+      </div>
     </div>
   </section>
 
