@@ -8,34 +8,38 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f5f8fa; color: #333; }
-    .highlight { color: #ff6f00; font-weight: 700; }
-    .hero { background: linear-gradient(135deg, #00c853, #1de9b6); display: flex; align-items: center; }
+    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; }
+    .highlight { color: #f6ad55; font-weight: 700; }
+    .hero { background: linear-gradient(135deg, #2f855a, #68d391); display: flex; align-items: center; }
     .hero-image { position: relative; overflow: hidden; }
     .hero-image img { transition: transform 0.5s ease; width: 100%; height: auto; }
     .hero-image img:hover { transform: scale(1.1); }
-    .sticky-nav { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .sticky-nav a.active { color: #00c853; border-bottom: 2px solid #00c853; }
-    .card, .solution-card, .impact-card, .join-card, .calc-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover, .solution-card:hover, .impact-card:hover, .join-card:hover, .calc-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-    .step-number { background: #ff6f00; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 2000; }
-    .modal-content { background: #fff; padding: 16px; border-radius: 10px; max-width: 90%; width: 100%; max-width: 400px; text-align: center; }
-    .modal-content button { background: #00c853; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; font-size: 1rem; }
-    .modal-content button:hover { background: #009624; }
+    .sticky-nav { position: sticky; top: 0; z-index: 1000; background: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .sticky-nav a.active { color: #68d391; border-bottom: 2px solid #68d391; }
+    .card, .solution-card, .impact-card, .join-card, .calc-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background: #ffffff; border: 1px solid #e6f0ea; }
+    .card:hover, .solution-card:hover, .impact-card:hover, .join-card:hover, .calc-card:hover { transform: translateY(-10px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+    .step-number { background: #f6ad55; color: #ffffff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
     /* Calculator Styles */
-    .calculator { background: linear-gradient(135deg, #e6ffe6, #fff); border: 2px solid #00c853; }
-    .calc-result { background: #e8f5e8; border-left: 4px solid #00c853; }
+    .calculator { background: #ffffff; border: 2px solid #68d391; }
+    .calc-result { background: #f0fff4; border-left: 4px solid #68d391; }
+    /* Section Backgrounds */
+    .section-bg-offwhite { background: #f8faf5; }
+    .section-bg-pale { background: #f0fff4; }
+    /* Button Styles */
+    .btn { background: #68d391; color: #ffffff; }
+    .btn:hover { background: #38a169; }
+    /* Headings */
+    h2, h3 { color: #2f855a; }
     /* Mobile-specific adjustments */
     @media (max-width: 640px) {
       .hero { min-height: auto; padding: 2rem 1rem; flex-direction: column; }
-      .hero-content h1 { font-size: 2rem; }
+      .hero-content h1 { font-size: 2.25rem; }
       .hero-content p { font-size: 1rem; }
       .hero-cta { flex-direction: column; gap: 0.75rem; }
       .hero-image img { max-width: 100%; }
       .sticky-nav ul { flex-wrap: wrap; gap: 1rem; padding: 0.5rem 0; }
       .sticky-nav a { font-size: 0.9rem; }
-      .section h2 { font-size: 1.8rem; }
+      .section h2 { font-size: 1.75rem; }
       .problem-prices { flex-direction: column; gap: 1rem; }
       .steps-container { gap: 1.5rem; }
       .step-content h3 { font-size: 1.1rem; }
@@ -53,8 +57,8 @@
       <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
       <p class="text-base mb-6 sm:text-xl sm:mb-8">Transform India's food system & earn by empowering your community</p>
       <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-start">
-        <a href="#join" class="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-full">Join Waitlist</a>
-        <a href="https://wa.me/918500742671" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full" target="_blank">Call Our Team</a>
+        <a href="#join" class="btn font-semibold py-3 px-6 rounded-full">Join Waitlist</a>
+        <a href="https://wa.me/918500742671" class="btn font-semibold py-3 px-6 rounded-full" target="_blank">Call Our Team</a>
       </div>
     </div>
     <div class="hero-image mt-6 sm:mt-0 sm:ml-12" data-aos="fade-left" data-aos-delay="200">
@@ -75,16 +79,16 @@
   </nav>
 
   <!-- Problem Section -->
-  <section id="problem" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Broken System</h2>
     <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
         🌾 <strong>10 Million Farmers</strong> earn only 25% of retail price & trapped in debt
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
         💰 <strong>4 Middlemen</strong> take ₹50/kg → 77% margin
       </div>
-      <div class="card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
         👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3x, get old vegetables
       </div>
     </div>
@@ -98,17 +102,17 @@
   </section>
 
   <!-- Solution Section -->
-  <section id="solution" class="section py-12 px-4 bg-gray-100 text-center sm:py-16" data-aos="fade-up">
+  <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">The <span class="highlight">JODO Solution</span></h2>
     <p class="text-base mb-6 sm:text-lg sm:mb-8">Remove middlemen, connect communities to farmers, <strong>save money and earn together!</strong></p>
     <div class="solution-comparison flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="solution-card before bg-red-100 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-left">
+      <div class="solution-card bg-red-50 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-left">
         <h3 class="text-lg font-semibold text-red-800 mb-3 sm:text-xl sm:mb-4">❌ Without JODO</h3>
         <p>Farmer: ₹15/kg → Middlemen: ₹45/kg → Family Pays: ₹60/kg</p>
         <p class="mt-2">😢 Farmer profit: ₹3,000/week</p>
         <p>😡 Family overpays: ₹32,500/month</p>
       </div>
-      <div class="solution-card after bg-green-100 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-right">
+      <div class="solution-card bg-green-50 p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="flip-right">
         <h3 class="text-lg font-semibold text-green-800 mb-3 sm:text-xl sm:mb-4">✅ With JODO</h3>
         <p>Farmer: ₹39/kg → JODO Platform 3.5% fee → 100 Families pay ₹45/kg</p>
         <p class="mt-2">😊 Farmer profit: ₹15,237/week (5x more!)</p>
@@ -119,7 +123,7 @@
   </section>
 
   <!-- How It Works -->
-  <section id="how" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
     <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
       <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
@@ -168,7 +172,7 @@
   </section>
 
   <!-- Calculator Section -->
-  <section id="calculator" class="section py-12 px-4 bg-green-50 text-center sm:py-16" data-aos="fade-up">
+  <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Calculate Your JODO Savings 💰</h2>
     <p class="text-base mb-8 sm:text-lg">Enter your monthly vegetable spend to see how much you can save with JODO!</p>
     <div class="calc-card calculator p-6 rounded-lg shadow-lg max-w-md mx-auto" data-aos="zoom-in">
@@ -176,7 +180,7 @@
         <label for="monthly-spend" class="block text-left text-sm font-semibold mb-2">Monthly Vegetable Spend (₹)</label>
         <input type="number" id="monthly-spend" placeholder="e.g., 32500" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 calc-input text-base">
       </div>
-      <button id="calc-submit" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full w-full mb-4">Calculate Savings</button>
+      <button id="calc-submit" class="btn font-semibold py-3 px-6 rounded-full w-full mb-4">Calculate Savings</button>
       <div id="calc-result" class="calc-result p-4 rounded-lg hidden">
         <h3 class="text-xl font-bold text-green-800 mb-2">Your Monthly Savings with JODO</h3>
         <p class="text-3xl font-bold text-green-600 mb-1" id="savings-amount">₹0</p>
@@ -186,84 +190,66 @@
   </section>
 
   <!-- Survey Section -->
-  <section id="survey" class="section py-12 px-4 bg-cyan-50 text-center rounded-2xl sm:py-16" data-aos="fade-up">
+  <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Use the form below or share via WhatsApp.</p>
-    <div class="max-w-md mx-auto">
-      <div class="mb-4">
-        <input type="text" id="name" placeholder="Your Name" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base">
-      </div>
-      <div class="mb-4">
-        <textarea id="suggestion" placeholder="Your Suggestion" rows="4" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"></textarea>
-      </div>
-      <div class="survey-cta flex flex-col gap-3 sm:flex-row sm:gap-4">
-        <button id="submit-suggestion" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Submit</button>
-        <a href="https://wa.me/918500742671?text=I%20have%20a%20suggestion%20for%20JODO:%20" target="_blank" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Send via WhatsApp</a>
-      </div>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestions directly via WhatsApp.</p>
+    <div class="survey-cta flex justify-center">
+      <a href="https://wa.me/918500742671?text=I%20have%20a%20suggestion%20for%20JODO%3A%20" target="_blank" class="btn font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Share via WhatsApp</a>
     </div>
   </section>
 
   <!-- Impact Section -->
-  <section id="impact" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <section id="impact" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Impact</h2>
     <div class="impact-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="impact-card bg-yellow-50 p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        <h3 class="text-lg font-semibold text-yellow-800 mb-3 sm:text-xl sm:mb-4">👨‍🌾 Farmers</h3>
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👨‍🌾 Farmers</h3>
         <p class="text-sm sm:text-base"><strong>5x Income Increase</strong> → ₹15,237/week</p>
       </div>
-      <div class="impact-card bg-yellow-50 p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        <h3 class="text-lg font-semibold text-yellow-800 mb-3 sm:text-xl sm:mb-4">👨‍👩‍👧‍👦 Families</h3>
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👨‍👩‍👧‍👦 Families</h3>
         <p class="text-sm sm:text-base"><strong>Save 30%</strong> → ₹5,500/month, farm-fresh vegetables</p>
       </div>
-      <div class="impact-card bg-yellow-50 p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        <h3 class="text-lg font-semibold text-yellow-800 mb-3 sm:text-xl sm:mb-4">👥 Community Leaders</h3>
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👥 Community Leaders</h3>
         <p class="text-sm sm:text-base">Earn <strong>₹20K/month</strong>, flexible work, meaningful service</p>
       </div>
     </div>
   </section>
 
   <!-- Join Section -->
-  <section id="join" class="section py-12 px-4 bg-gray-100 text-center sm:py-16" data-aos="fade-up">
+  <section id="join" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">Join the <span class="highlight">JODO Movement</span></h2>
     <div class="join-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="join-card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        <h3 class="text-lg font-semibold text-orange-600 mb-3 sm:text-xl sm:mb-4">For Families</h3>
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Families</h3>
         <p class="text-sm sm:text-base">Save 30% on groceries. Get farm-fresh vegetables.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
+        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
       </div>
-      <div class="join-card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        <h3 class="text-lg font-semibold text-orange-600 mb-3 sm:text-xl sm:mb-4">For Farmers</h3>
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Farmers</h3>
         <p class="text-sm sm:text-base">Earn 5x more. Get guaranteed payment.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
+        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
       </div>
-      <div class="join-card bg-white p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        <h3 class="text-lg font-semibold text-orange-600 mb-3 sm:text-xl sm:mb-4">Become a Leader</h3>
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
+        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">Become a Leader</h3>
         <p class="text-sm sm:text-base">Earn ₹15-20K/month from a ₹500 community investment.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Apply Now</a>
+        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Apply Now</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8 px-4 text-center" data-aos="fade-up">
-    <p class="mb-2 text-sm sm:text-base">📧 Email: <a href="mailto:contact@jodo.in" class="text-green-400 hover:text-green-500">contact@jodo.in</a></p>
-    <p class="mb-2 text-sm sm:text-base">📱 WhatsApp: <a href="https://wa.me/918500742671" target="_blank" class="text-green-400 hover:text-green-500">+91 85007 42671</a></p>
+  <footer class="bg-green-800 text-white py-8 px-4 text-center" data-aos="fade-up">
+    <p class="mb-2 text-sm sm:text-base">📧 Email: <a href="mailto:contact@jodo.in" class="text-orange-400 hover:text-orange-300">contact@jodo.in</a></p>
+    <p class="mb-2 text-sm sm:text-base">📱 WhatsApp: <a href="https://wa.me/918500742671" target="_blank" class="text-orange-400 hover:text-orange-300">+91 85007 42671</a></p>
     <div class="social-links flex justify-center gap-4 mb-4">
-      <a href="#" target="_blank" class="text-green-400 hover:text-green-500 text-sm sm:text-base">Facebook</a>
-      <a href="#" target="_blank" class="text-green-400 hover:text-green-500 text-sm sm:text-base">Instagram</a>
-      <a href="#" target="_blank" class="text-green-400 hover:text-green-500 text-sm sm:text-base">Twitter</a>
+      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Facebook</a>
+      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Instagram</a>
+      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Twitter</a>
     </div>
     <p class="text-sm sm:text-base">📍 Launching in: Your City</p>
   </footer>
-
-  <!-- Modal for Form Submission -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h3 id="modal-title" class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4"></h3>
-      <p id="modal-message" class="mb-4 text-sm sm:text-base"></p>
-      <button id="modal-close" class="text-sm sm:text-base">Close</button>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
@@ -314,38 +300,6 @@
       savingsAmount.textContent = `₹${Math.round(savings)}`;
       savingsPercent.textContent = `${percentage} savings`;
       resultDiv.classList.remove('hidden');
-    });
-
-    // Form submission with modal feedback
-    document.getElementById('submit-suggestion').addEventListener('click', () => {
-      const name = document.getElementById('name').value.trim();
-      const suggestion = document.getElementById('suggestion').value.trim();
-      const modal = document.getElementById('modal');
-      const modalTitle = document.getElementById('modal-title');
-      const modalMessage = document.getElementById('modal-message');
-
-      if (name && suggestion) {
-        modalTitle.textContent = 'Thank You!';
-        modalMessage.textContent = `Thank you, ${name}! Your suggestion has been submitted. We'll review it soon.`;
-        document.getElementById('name').value = '';
-        document.getElementById('suggestion').value = '';
-      } else {
-        modalTitle.textContent = 'Error';
-        modalMessage.textContent = 'Please fill out both fields before submitting.';
-      }
-      modal.style.display = 'flex';
-    });
-
-    // Close modal
-    document.getElementById('modal-close').addEventListener('click', () => {
-      document.getElementById('modal').style.display = 'none';
-    });
-
-    // Close modal when clicking outside
-    document.getElementById('modal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('modal')) {
-        document.getElementById('modal').style.display = 'none';
-      }
     });
   </script>
 </body>
