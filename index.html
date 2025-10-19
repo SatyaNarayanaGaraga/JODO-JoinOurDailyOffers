@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; }
+    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; overflow-anchor: auto; font-size: 1rem; }
     .highlight { color: #f6ad55; font-weight: 700; }
     .hero { background: linear-gradient(135deg, #2f855a, #68d391); display: flex; align-items: center; }
     .hero-image { position: relative; overflow: hidden; }
@@ -26,30 +26,48 @@
     .section-bg-offwhite { background: #f8faf5; }
     .section-bg-pale { background: #f0fff4; }
     /* Button Styles */
-    .btn { background: #68d391; color: #ffffff; }
+    .btn { background: #68d391; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 9999px; }
     .btn:hover { background: #38a169; }
     /* Input Styles */
-    .survey-input { width: 100%; padding: 0.75rem; border: 1px solid #e6f0ea; border-radius: 0.5rem; font-size: 1rem; }
-    .survey-input:focus { outline: none; border-color: #68d391; box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.2); }
+    .survey-input, .calc-input { width: 100%; padding: 0.75rem; border: 1px solid #e6f0ea; border-radius: 0.5rem; font-size: 1rem; }
+    .survey-input:focus, .calc-input:focus { outline: none; border-color: #68d391; box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.2); }
     /* Headings */
     h2, h3 { color: #2f855a; }
     /* Mobile-specific adjustments */
     @media (max-width: 640px) {
-      .hero { min-height: auto; padding: 2rem 1rem; flex-direction: column; }
-      .hero-content h1 { font-size: 2.25rem; }
-      .hero-content p { font-size: 1rem; }
-      .hero-cta { flex-direction: column; gap: 0.75rem; }
-      .hero-image img { max-width: 100%; }
-      .sticky-nav ul { flex-wrap: wrap; gap: 1rem; padding: 0.5rem 0; }
-      .sticky-nav a { font-size: 0.9rem; }
-      .section h2 { font-size: 1.75rem; }
-      .problem-prices { flex-direction: column; gap: 1rem; }
-      .steps-container { gap: 1.5rem; }
-      .step-content h3 { font-size: 1.1rem; }
-      .step-content p { font-size: 0.9rem; }
-      .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
-      .calc-input, .survey-input { font-size: 0.9rem; padding: 0.5rem; }
-      .survey-cta { flex-direction: column; gap: 0.75rem; }
+      body { font-size: 0.875rem; }
+      .hero { flex-direction: column; padding: 2rem 1rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 0.875rem; }
+      .hero-cta { flex-direction: column; gap: 0.5rem; }
+      .hero-image { margin-top: 1rem; }
+      .hero-image img { max-width: 80%; margin: 0 auto; }
+      .sticky-nav { padding: 0.5rem 0; }
+      .sticky-nav ul { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+      .sticky-nav a { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+      .section { padding: 2rem 0.75rem; }
+      .section h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+      .problem-cards, .solution-comparison, .impact-cards, .join-cards { flex-direction: column; gap: 0.5rem; }
+      .card, .solution-card, .impact-card, .join-card, .calc-card { padding: 1rem; max-width: 100%; }
+      .problem-prices { flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
+      .problem-prices div { font-size: 0.875rem; }
+      .problem-prices span { font-size: 0.75rem; }
+      .steps-container { gap: 1rem; flex-direction: column; align-items: center; }
+      .step { flex-direction: row; gap: 0.5rem; max-width: 100%; }
+      .step-number { width: 24px; height: 24px; font-size: 0.875rem; }
+      .step-content h3 { font-size: 1rem; }
+      .step-content p { font-size: 0.875rem; }
+      .calculator { padding: 1rem; }
+      .calc-input, .survey-input { font-size: 0.875rem; padding: 0.5rem; }
+      .calc-result { padding: 0.75rem; }
+      .calc-result h3 { font-size: 1rem; }
+      .calc-result p { font-size: 0.875rem; }
+      .survey-cta { flex-direction: column; gap: 0.5rem; }
+      .btn { font-size: 0.875rem; padding: 0.75rem 1.5rem; }
+      .footer { padding: 1.5rem 0.75rem; }
+      .footer p, .footer a { font-size: 0.75rem; }
+      .social-links { gap: 0.5rem; }
+      [data-aos] { opacity: 1 !important; transform: none !important; } /* Disable AOS on mobile */
     }
   </style>
 </head>
@@ -60,8 +78,8 @@
       <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
       <p class="text-base mb-6 sm:text-xl sm:mb-8">Transform India's food system & earn by empowering your community</p>
       <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-start">
-        <a href="#join" class="btn font-semibold py-3 px-6 rounded-full">Join Waitlist</a>
-        <a href="https://wa.me/918500742671" class="btn font-semibold py-3 px-6 rounded-full" target="_blank">Call Our Team</a>
+        <a href="#join" class="btn font-semibold">Join Waitlist</a>
+        <a href="https://wa.me/918500742671" class="btn font-semibold" target="_blank">Call Our Team</a>
       </div>
     </div>
     <div class="hero-image mt-6 sm:mt-0 sm:ml-12" data-aos="fade-left" data-aos-delay="200">
@@ -177,13 +195,13 @@
   <!-- Calculator Section -->
   <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Calculate Your JODO Savings 💰</h2>
-    <p class="text-base mb-8 sm:text-lg">Enter your monthly vegetable spend to see how much you can save with JODO!</p>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">Enter your monthly vegetable spend to see how much you can save with JODO!</p>
     <div class="calc-card calculator p-6 rounded-lg shadow-lg max-w-md mx-auto" data-aos="zoom-in">
       <div class="mb-4">
         <label for="monthly-spend" class="block text-left text-sm font-semibold mb-2">Monthly Vegetable Spend (₹)</label>
-        <input type="number" id="monthly-spend" placeholder="e.g., 32500" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 calc-input text-base">
+        <input type="number" id="monthly-spend" placeholder="e.g., 32500" class="calc-input">
       </div>
-      <button id="calc-submit" class="btn font-semibold py-3 px-6 rounded-full w-full mb-4">Calculate Savings</button>
+      <button id="calc-submit" class="btn font-semibold w-full mb-4">Calculate Savings</button>
       <div id="calc-result" class="calc-result p-4 rounded-lg hidden">
         <h3 class="text-xl font-bold text-green-800 mb-2">Your Monthly Savings with JODO</h3>
         <p class="text-3xl font-bold text-green-600 mb-1" id="savings-amount">₹0</p>
@@ -201,7 +219,7 @@
         <input type="text" id="suggestion-input" placeholder="Enter your suggestion" class="survey-input">
       </div>
       <div class="survey-cta flex justify-center">
-        <a id="whatsapp-suggestion" href="https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20" target="_blank" class="btn font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Share via WhatsApp</a>
+        <a id="whatsapp-suggestion" href="https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20" target="_blank" class="btn font-semibold text-sm sm:text-base">Share via WhatsApp</a>
       </div>
     </div>
   </section>
@@ -232,17 +250,17 @@
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Families</h3>
         <p class="text-sm sm:text-base">Save 30% on groceries. Get farm-fresh vegetables.</p>
-        <a href="https://wa.me/918500742671?text=I%20want%20to%20join%20the%20JODO%20waitlist%20as%20a%20family%20to%20save%20on%20groceries%20and%20get%20farm-fresh%20vegetables." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20join%20the%20JODO%20waitlist%20as%20a%20family%20to%20save%20on%20groceries%20and%20get%20farm-fresh%20vegetables." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
       </div>
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Farmers</h3>
         <p class="text-sm sm:text-base">Earn 5x more. Get guaranteed payment.</p>
-        <a href="https://wa.me/918500742671?text=I%E2%80%99m%20a%20farmer%20interested%20in%20partnering%20with%20JODO%20to%20earn%20more%20and%20get%20guaranteed%20payments." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
+        <a href="https://wa.me/918500742671?text=I%E2%80%99m%20a%20farmer%20interested%20in%20partnering%20with%20JODO%20to%20earn%20more%20and%20get%20guaranteed%20payments." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
       </div>
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">Become a Leader</h3>
         <p class="text-sm sm:text-base">Earn ₹15-20K/month from a ₹500 community investment.</p>
-        <a href="https://wa.me/918500742671?text=I%20want%20to%20apply%20as%20a%20JODO%20community%20leader%20to%20earn%20%E2%82%B915-20K/month." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Apply Now</a>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20apply%20as%20a%20JODO%20community%20leader%20to%20earn%20%E2%82%B915-20K/month." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Apply Now</a>
       </div>
     </div>
   </section>
@@ -261,14 +279,23 @@
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Initialize AOS
-    AOS.init({ duration: 800, once: true });
+    // Initialize AOS with reduced duration and mobile disable
+    AOS.init({ duration: 600, once: true, disable: window.innerWidth < 640 });
 
-    // Smooth scrolling
+    // Smooth scrolling with offset
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const offset = 60;
+          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: elementPosition - offset,
+            behavior: 'smooth'
+          });
+        }
       });
     });
 
@@ -302,7 +329,7 @@
         return;
       }
 
-      const savings = monthlySpend * 0.31; // 31% savings as per the site
+      const savings = monthlySpend * 0.31;
       const percentage = '31%';
 
       savingsAmount.textContent = `₹${Math.round(savings)}`;
@@ -316,6 +343,16 @@
       const whatsappLink = document.getElementById('whatsapp-suggestion');
       const encodedSuggestion = encodeURIComponent(`My suggestion for JODO: ${suggestion}`);
       whatsappLink.href = `https://wa.me/918500742671?text=${encodedSuggestion}`;
+    });
+
+    // Prevent scroll jump on input focus
+    document.querySelectorAll('.survey-input, .calc-input').forEach(input => {
+      input.addEventListener('focus', () => {
+        const scrollY = window.scrollY;
+        input.addEventListener('blur', () => {
+          window.scrollTo({ top: scrollY, behavior: 'auto' });
+        }, { once: true });
+      });
     });
   </script>
 </body>
