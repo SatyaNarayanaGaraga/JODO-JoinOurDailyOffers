@@ -1,0 +1,83 @@
+/* Reset */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {line-height:1.6;background:#f5f8fa;color:#333;}
+
+/* Buttons */
+.btn {padding:12px 25px;border-radius:25px;font-weight:600;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-primary {background:#00c853;color:#fff;}
+.btn-primary:hover {background:#009624;color:#fff;}
+.btn-whatsapp {background:#25D366;color:#fff;}
+.btn-whatsapp:hover {background:#1ebe5d;}
+
+/* Highlight Text */
+.highlight {color:#ff6f00;font-weight:700;}
+
+/* Hero */
+.hero {display:flex;flex-direction:column-reverse;align-items:center;padding:clamp(40px,10vw,60px);background:linear-gradient(135deg,#00c853,#1de9b6);color:#fff;text-align:center;}
+.hero-content h1 {font-size:clamp(2.5rem,6vw,3rem);margin-bottom:20px;}
+.hero-content p {font-size:clamp(1.2rem,4vw,1.5rem);margin-bottom:25px;}
+.hero-cta {display:flex;gap:15px;justify-content:center;margin-top:15px;}
+.hero-image img {width:100%;max-width:450px;border-radius:20px;margin-bottom:20px;transition:0.3s;}
+.hero-image img:hover {transform:scale(1.05);}
+
+/* Sticky Nav */
+.sticky-nav {position:sticky;top:0;background:#fff;z-index:1000;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.sticky-nav ul {display:flex;justify-content:center;gap:20px;padding:10px 0;list-style:none;}
+.sticky-nav a {text-decoration:none;color:#333;font-weight:600;transition:0.3s;}
+.sticky-nav a:hover {color:#00c853;}
+
+/* Sections */
+.section {padding:clamp(40px,10vw,60px);text-align:center;}
+.section h2 {font-size:clamp(1.8rem,5vw,2.5rem);margin-bottom:40px;}
+
+/* Problem */
+.problem-cards {display:flex;flex-direction:column;gap:15px;align-items:center;}
+.card {background:#fff;padding:20px 25px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.05);font-weight:600;max-width:400px;width:90%;transition:0.3s;}
+.card:hover {transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+
+/* Problem Prices */
+.problem-prices {display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;font-weight:700;}
+.problem-prices div span {font-weight:400;font-size:0.9rem;display:block;margin-top:5px;}
+
+/* Solution */
+.solution-comparison {display:flex;flex-direction:column;gap:20px;margin-top:30px;}
+.solution-card {padding:25px;border-radius:15px;line-height:1.6;box-shadow:0 5px 15px rgba(0,0,0,0.05);transition:0.3s;}
+.solution-card:hover {transform:translateY(-5px);}
+.before {background:#ffe6e6;color:#b30000;}
+.after {background:#e6ffe6;color:#006400;}
+
+/* How It Works */
+.steps-container {display:flex;flex-direction:column;gap:25px;align-items:flex-start;max-width:900px;margin:0 auto;}
+.step {display:flex;align-items:flex-start;gap:20px;}
+.step-number {background:#ff6f00;color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.4rem;flex-shrink:0;}
+.step-content h3 {margin-bottom:5px;font-size:1.2rem;font-weight:600;}
+.step-content p {font-size:1rem;line-height:1.4;}
+.step-content .highlight {color:#00c853;}
+
+/* Survey Section */
+.survey-section {background:#e0f7fa;padding:50px 20px;border-radius:15px;margin-top:40px;}
+
+/* Impact */
+.impact-cards {display:flex;flex-direction:column;gap:20px;align-items:center;margin-top:30px;}
+.impact-card {background:#fffde7;padding:20px;border-radius:15px;width:90%;max-width:300px;box-shadow:0 5px 15px rgba(0,0,0,0.05);transition:0.3s;}
+.impact-card:hover {transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+
+/* Join Section */
+.join-cards {display:flex;flex-direction:column;gap:20px;align-items:center;margin-top:30px;}
+.join-card {background:#ffffff;padding:25px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);width:90%;max-width:350px;transition:0.3s;}
+.join-card:hover {transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+.join-card h3 {margin-bottom:15px;color:#ff6f00;}
+
+/* Footer */
+footer {background:#333;color:#fff;padding:30px 10px;text-align:center;}
+footer a {color:#25D366;text-decoration:none;font-weight:600;}
+footer a:hover {color:#1ebe5d;}
+.social-links a {margin:0 5px;}
+
+/* Responsive */
+@media(min-width:768px){
+  .hero {flex-direction:row;text-align:left;justify-content:space-around;}
+  .solution-comparison {flex-direction:row;justify-content:center;gap:20px;}
+  .problem-cards, .impact-cards, .join-cards, .steps-container {flex-direction:row;justify-content:center;gap:20px;flex-wrap:wrap;}
+  .step-content p {text-align:left;}
+}
