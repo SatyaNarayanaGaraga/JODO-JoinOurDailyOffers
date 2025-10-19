@@ -117,37 +117,69 @@
     </ul>
   </nav>
 
-  <!-- Problem Section -->
-  <section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Broken System</h2>
-    <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        🌾 <strong>10 Million Farmers</strong> earn only 25% of retail price & trapped in debt
-      </div>
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        💰 <strong>4 Middlemen</strong> take ₹50/kg → 77% margin
-      </div>
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3x, get old vegetables
-      </div>
+<!-- Problem Section -->
+<section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Broken System</h2>
+
+  <!-- Problem Cards -->
+  <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
+    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
+      🌾 <strong>10 Million Farmers</strong> earn barely 25% of retail price & remain trapped in debt.
     </div>
-    <div class="price-flow flex flex-col justify-center gap-3 mt-6 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-8 sm:text-lg">
-      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="100">
-        <span class="text-2xl text-red-600">₹15/kg</span><br>
-        <span class="text-sm font-normal">What farmers earn 😢</span>
-      </div>
-      <div class="price-arrow self-center" data-aos="fade-up" data-aos-delay="200">→</div>
-      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="300">
-        <span class="text-2xl font-bold text-green-800">₹35/kg</span><br>
-        <span class="text-sm font-normal">What you pay 💸</span>
-      </div>
-      <div class="price-arrow self-center" data-aos="fade-up" data-aos-delay="400">→</div>
-      <div class="price-card p-4 rounded-lg shadow-lg border-2 border-green-500 w-full max-w-xs" data-aos="fade-up" data-aos-delay="500">
-        <span class="text-2xl italic text-orange-600">₹50/kg</span><br>
-        <span class="text-sm font-normal">Middlemen take 😡</span>
-      </div>
+    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
+      💰 <strong>4 Middlemen</strong> take most of the value — adding zero contribution.
     </div>
-  </section>
+    <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
+      👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3× and get days-old vegetables.
+    </div>
+  </div>
+
+  <!-- Price Flow Visualization -->
+  <div class="price-flow flex flex-col justify-center items-center gap-4 mt-10 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-12 sm:text-lg overflow-x-auto scroll-smooth">
+    
+    <!-- Farmer -->
+    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-green-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="100">
+      <span class="text-3xl font-bold text-green-600">₹15/kg</span><br>
+      <span class="text-sm font-normal text-gray-600">What farmers get 😢</span>
+    </div>
+
+    <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="150">→</div>
+
+    <!-- Consumer -->
+    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-blue-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="200">
+      <span class="text-3xl font-bold text-blue-600">₹60/kg</span><br>
+      <span class="text-sm font-normal text-gray-600">What families pay 💸</span>
+    </div>
+
+    <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="250">→</div>
+
+    <!-- Middlemen Loss -->
+    <div class="price-card p-5 rounded-xl shadow-lg border-2 border-orange-500 bg-white w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="300">
+      <span class="text-3xl font-bold text-orange-600">₹45/kg</span><br>
+      <span class="text-sm font-normal text-gray-600">Lost to middlemen 😡</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Smooth horizontal scroll for mobile */
+  .price-flow::-webkit-scrollbar {
+    height: 6px;
+  }
+  .price-flow::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  .price-card {
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .price-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+</style>
+
 
   <!-- Solution Section -->
   <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
