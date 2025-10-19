@@ -28,6 +28,9 @@
     /* Button Styles */
     .btn { background: #68d391; color: #ffffff; }
     .btn:hover { background: #38a169; }
+    /* Input Styles */
+    .survey-input { width: 100%; padding: 0.75rem; border: 1px solid #e6f0ea; border-radius: 0.5rem; font-size: 1rem; }
+    .survey-input:focus { outline: none; border-color: #68d391; box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.2); }
     /* Headings */
     h2, h3 { color: #2f855a; }
     /* Mobile-specific adjustments */
@@ -45,7 +48,7 @@
       .step-content h3 { font-size: 1.1rem; }
       .step-content p { font-size: 0.9rem; }
       .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
-      .calc-input { font-size: 1rem; }
+      .calc-input, .survey-input { font-size: 0.9rem; padding: 0.5rem; }
       .survey-cta { flex-direction: column; gap: 0.75rem; }
     }
   </style>
@@ -192,9 +195,14 @@
   <!-- Survey Section -->
   <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestions directly via WhatsApp.</p>
-    <div class="survey-cta flex justify-center">
-      <a href="https://wa.me/918500742671?text=I%20have%20a%20suggestion%20for%20JODO%3A%20" target="_blank" class="btn font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Share via WhatsApp</a>
+    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Enter your suggestion below and share it directly via WhatsApp.</p>
+    <div class="max-w-md mx-auto">
+      <div class="mb-4">
+        <input type="text" id="suggestion-input" placeholder="Enter your suggestion" class="survey-input">
+      </div>
+      <div class="survey-cta flex justify-center">
+        <a id="whatsapp-suggestion" href="https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20" target="_blank" class="btn font-semibold py-3 px-6 rounded-full text-sm sm:text-base">Share via WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -224,17 +232,17 @@
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Families</h3>
         <p class="text-sm sm:text-base">Save 30% on groceries. Get farm-fresh vegetables.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20join%20the%20JODO%20waitlist%20as%20a%20family%20to%20save%20on%20groceries%20and%20get%20farm-fresh%20vegetables." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
       </div>
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Farmers</h3>
         <p class="text-sm sm:text-base">Earn 5x more. Get guaranteed payment.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
+        <a href="https://wa.me/918500742671?text=I%E2%80%99m%20a%20farmer%20interested%20in%20partnering%20with%20JODO%20to%20earn%20more%20and%20get%20guaranteed%20payments." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
       </div>
       <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
         <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">Become a Leader</h3>
         <p class="text-sm sm:text-base">Earn ₹15-20K/month from a ₹500 community investment.</p>
-        <a href="https://wa.me/918500742671" target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Apply Now</a>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20apply%20as%20a%20JODO%20community%20leader%20to%20earn%20%E2%82%B915-20K/month." target="_blank" class="btn font-semibold py-3 px-6 rounded-full mt-4 inline-block text-sm sm:text-base">Apply Now</a>
       </div>
     </div>
   </section>
@@ -300,6 +308,14 @@
       savingsAmount.textContent = `₹${Math.round(savings)}`;
       savingsPercent.textContent = `${percentage} savings`;
       resultDiv.classList.remove('hidden');
+    });
+
+    // Survey WhatsApp link update
+    document.getElementById('suggestion-input').addEventListener('input', () => {
+      const suggestion = document.getElementById('suggestion-input').value.trim();
+      const whatsappLink = document.getElementById('whatsapp-suggestion');
+      const encodedSuggestion = encodeURIComponent(`My suggestion for JODO: ${suggestion}`);
+      whatsappLink.href = `https://wa.me/918500742671?text=${encodedSuggestion}`;
     });
   </script>
 </body>
