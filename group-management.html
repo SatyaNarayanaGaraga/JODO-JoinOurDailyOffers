@@ -1,0 +1,49 @@
+<!-- group-management.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JODO - Group Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; font-size: 1rem; }
+    .btn { background: #68d391; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 9999px; transition: background 0.3s ease, transform 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .btn:hover { background: #38a169; transform: translateY(-2px); }
+    .btn-company { background: #f6ad55; }
+    .btn-company:hover { background: #dd6b20; }
+    .btn-leader { background: #2f855a; }
+    .btn-leader:hover { background: #1a4731; }
+    .btn-member { background: #38a169; }
+    .btn-member:hover { background: #2f855a; }
+    .highlight { color: #f6ad55; font-weight: 700; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+    @media (max-width: 640px) {
+      body { font-size: 0.875rem; }
+      .btn { font-size: 0.875rem; padding: 0.75rem 1rem; }
+      h2 { font-size: 1.5rem; }
+      p { font-size: 0.875rem; }
+    }
+    /* Enhanced for uniqueness */
+    .container { background: linear-gradient(135deg, #f8faf5, #e6f0ea); border-radius: 2rem; box-shadow: 0 10px 30px rgba(104, 211, 145, 0.2); }
+    .btn { position: relative; overflow: hidden; }
+    .btn::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%); transform: rotate(45deg); transition: all 0.5s; }
+    .btn:hover::before { top: -100%; left: -100%; }
+    /* More unique and innovative */
+    .container { position: relative; overflow: hidden; }
+    .container::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%2368d391" fill-opacity="0.1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,245.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E') bottom no-repeat; background-size: cover; pointer-events: none; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-center bg-gray-100">
+  <div class="container">
+    <h2 class="text-3xl font-bold mb-6 highlight">JODO Group Management</h2>
+    <p class="text-lg mb-8">Access your role-specific dashboard</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="company-dashboard.html" class="btn btn-company font-semibold">Company Dashboard</a>
+      <a href="leader-dashboard.html" class="btn btn-leader font-semibold">Group Leader Dashboard</a>
+      <a href="member-dashboard.html" class="btn btn-member font-semibold">Member Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

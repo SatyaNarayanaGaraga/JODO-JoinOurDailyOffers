@@ -28,18 +28,18 @@
     .vine-path { stroke: #38a169; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growVine 3s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(104, 211, 145, 0.7)); }
     .vine-path:hover { stroke: #38a169; }
     .coin, .leaf, .sparkle { position: absolute; animation-iteration-count: infinite; pointer-events: none; }
-    .coin { 
-      background: #f6ad55; 
-      border-radius: 50%; 
-      box-shadow: 0 0 6px rgba(246, 173, 85, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5); 
+    .coin {
+      background: #f6ad55;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(246, 173, 85, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5);
       transform-origin: center;
     }
     .coin.silver { background: #d1d5db; box-shadow: 0 0 6px rgba(209, 213, 219, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5); }
-    .leaf { 
-      width: 12px; 
-      height: 12px; 
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat; 
-      animation: floatLeaf 6s infinite; 
+    .leaf {
+      width: 12px;
+      height: 12px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat;
+      animation: floatLeaf 6s infinite;
     }
     .sparkle {
       width: 6px;
@@ -65,27 +65,27 @@
       100% { opacity: 0; transform: scale(0.5); }
     }
     /* Calculator Styles */
-    .calculator { 
-      background: #ffffff; 
-      border: 2px solid #68d391; 
-      position: relative; 
-      overflow: hidden; 
-      background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%); 
-      animation: glowPulse 6s ease-in-out infinite; 
+    .calculator {
+      background: #ffffff;
+      border: 2px solid #68d391;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%);
+      animation: glowPulse 6s ease-in-out infinite;
     }
     .calc-result { background: #f0fff4; border-left: 4px solid #68d391; }
-    .coin-stack { 
-      position: absolute; 
-      bottom: 10px; 
-      left: 50%; 
-      transform: translateX(-50%); 
-      width: 60px; 
-      height: 20px; 
-      transition: height 0.5s ease; 
+    .coin-stack {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 20px;
+      transition: height 0.5s ease;
     }
     /* Realistic Coin Physics for Calculator Section */
-    #calculator .coin { 
-      animation: fallCoin 3.5s infinite ease-in-out; 
+    #calculator .coin {
+      animation: fallCoin 3.5s infinite ease-in-out;
     }
     #calculator .coin:nth-child(1) { width: 16px; height: 16px; top: -30px; left: 15%; animation: fallCoin1 3.8s infinite ease-in-out; animation-delay: 0s; }
     #calculator .coin:nth-child(2) { width: 12px; height: 12px; top: -30px; left: 35%; animation: fallCoin2 3.2s infinite ease-in-out; animation-delay: 0.6s; }
@@ -462,7 +462,7 @@
   </style>
 </head>
 <body>
-  <!-- Hero Section (unchanged) -->
+  <!-- Hero Section -->
   <header class="hero flex flex-col items-center justify-center px-4 py-12 text-white sm:py-16" data-aos="fade-up">
     <div class="hero-content text-center max-w-lg sm:max-w-2xl">
       <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
@@ -470,11 +470,11 @@
       <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-center">
         <a href="#join" class="btn font-semibold">Join Waitlist</a>
         <a href="https://wa.me/918500742671" class="btn font-semibold" target="_blank">Call Our Team</a>
+        <a href="group-management.html" class="btn font-semibold">Group Management</a>
       </div>
     </div>
   </header>
-
-  <!-- Sticky Navigation (unchanged) -->
+  <!-- Sticky Navigation -->
   <nav class="sticky-nav py-3 bg-white sm:py-4">
     <ul class="flex justify-center gap-4 text-base font-semibold sm:gap-10 sm:text-lg">
       <li><a href="#problem" class="text-gray-700 hover:text-green-500">Problem</a></li>
@@ -485,8 +485,7 @@
       <li><a href="#join" class="text-gray-700 hover:text-green-500">Join</a></li>
     </ul>
   </nav>
-
-  <!-- Problem Section (unchanged) -->
+  <!-- Problem Section -->
   <section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <div class="debris"></div><div class="debris"></div><div class="debris"></div><div class="debris"></div>
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12 relative z-10">The Broken System</h2>
@@ -518,8 +517,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Solution Section (unchanged) -->
+  <!-- Solution Section -->
   <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
     <div class="coin"></div><div class="coin"></div>
     <div class="leaf"></div><div class="leaf"></div>
@@ -556,8 +554,7 @@
       </div>
     </div>
   </section>
-
-  <!-- How It Works Section (unchanged) -->
+  <!-- How It Works Section -->
   <section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
     <div class="coin"></div><div class="coin"></div>
     <div class="leaf"></div><div class="leaf"></div>
@@ -585,8 +582,8 @@
           <span class="step-icon">👥</span>
           <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
           <p class="text-sm sm:text-base">
-            Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.  
-            Each contributes ₹100, creating a <strong>₹10,000 local working capital</strong>.  
+            Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.
+            Each contributes ₹100, creating a <strong>₹10,000 local working capital</strong>.
             👉 A self-funded, trust-based community economy.
           </p>
         </div>
@@ -597,7 +594,7 @@
           <span class="step-icon">🧑‍💼</span>
           <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
           <p class="text-sm sm:text-base">
-            A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.  
+            A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.
             💰 Earns <strong>₹15K–₹20K/month</strong> by growing the group’s active families.
           </p>
         </div>
@@ -608,7 +605,7 @@
           <span class="step-icon">📱</span>
           <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
           <p class="text-sm sm:text-base">
-            Families place orders via <strong>App or WhatsApp</strong>.  
+            Families place orders via <strong>App or WhatsApp</strong>.
             Orders are aggregated and finalized <strong>48 hours in advance</strong> for zero-waste procurement.
           </p>
         </div>
@@ -619,7 +616,7 @@
           <span class="step-icon">🌾</span>
           <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
           <p class="text-sm sm:text-base">
-            JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.  
+            JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.
             Ensuring fair prices and faster cash flow to the roots of India’s food chain.
           </p>
         </div>
@@ -630,7 +627,7 @@
           <span class="step-icon">🚚</span>
           <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
           <p class="text-sm sm:text-base">
-            A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,  
+            A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,
             cutting last-mile delivery costs and reducing waste.
           </p>
         </div>
@@ -641,14 +638,13 @@
           <span class="step-icon">🛒</span>
           <h3 class="text-base font-semibold sm:text-lg">Family Pickup & Refill</h3>
           <p class="text-sm sm:text-base">
-            Each family walks 50–100 meters to collect their order, pay locally,  
+            Each family walks 50–100 meters to collect their order, pay locally,
             and <strong>refill the working capital</strong> — keeping the JODO cycle continuously revolving.
           </p>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Calculator Section with Enhanced Coin Animations -->
   <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
     <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin silver"></div><div class="coin silver"></div><div class="coin"></div>
@@ -674,8 +670,7 @@
       </svg>
     </div>
   </section>
-
-  <!-- Survey Section (unchanged) -->
+  <!-- Survey Section -->
   <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
     <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestion via WhatsApp.</p>
@@ -688,8 +683,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Impact Section (unchanged) -->
+  <!-- Impact Section -->
   <section id="impact" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Impact</h2>
     <div class="impact-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
@@ -707,8 +701,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Join Section (unchanged) -->
+  <!-- Join Section -->
   <section id="join" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
     <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">Join the <span class="highlight">JODO Movement</span></h2>
     <div class="join-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
@@ -729,8 +722,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer (unchanged) -->
+  <!-- Footer -->
   <footer class="bg-green-800 text-white py-8 px-4 text-center" data-aos="fade-up">
     <p class="mb-2 text-sm sm:text-base">📧 Email: <a href="mailto:contact@jodo.in" class="text-orange-400 hover:text-orange-300">contact@jodo.in</a></p>
     <p class="mb-2 text-sm sm:text-base">📱 WhatsApp: <a href="https://wa.me/918500742671" target="_blank" class="text-orange-400 hover:text-orange-300">+91 85007 42671</a></p>
@@ -741,15 +733,12 @@
     </div>
     <p class="text-sm sm:text-base">📍 Launching in: Your City</p>
   </footer>
-
   <!-- Audio for Coin Clink (Optional) -->
   <audio id="coin-clink" src="https://cdn.pixabay.com/audio/2023/03/20/coin-clink.mp3" preload="auto"></audio>
-
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     // Initialize AOS with reduced duration and mobile disable
     AOS.init({ duration: 600, once: true, disable: window.innerWidth < 640 });
-
     // Smooth scrolling with offset
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -766,7 +755,6 @@
         }
       });
     });
-
     // Active nav link highlighting
     const sections = document.querySelectorAll('section[id]');
     window.addEventListener('scroll', () => {
@@ -784,7 +772,6 @@
         }
       });
     });
-
     // Calculator functionality with coin burst and stack
     document.getElementById('calc-submit').addEventListener('click', () => {
       const monthlySpend = parseFloat(document.getElementById('monthly-spend').value);
@@ -793,22 +780,18 @@
       const savingsPercent = document.getElementById('savings-percent');
       const coinStack = document.querySelector('.coin-stack');
       const calculator = document.querySelector('.calculator');
-
       if (isNaN(monthlySpend) || monthlySpend <= 0) {
         alert('Please enter a valid monthly spend amount.');
         return;
       }
-
       const savings = monthlySpend * 0.31;
       const percentage = '31%';
       const maxStackHeight = 60; // Max height for coin stack in px
       const stackHeight = Math.min(savings / 100, maxStackHeight); // Scale stack height based on savings
-
       savingsAmount.textContent = `₹${Math.round(savings)}`;
       savingsPercent.textContent = `${percentage} savings`;
       resultDiv.classList.remove('hidden');
       coinStack.style.height = `${stackHeight}px`;
-
       // Trigger coin burst
       const burstCount = Math.min(Math.floor(savings / 1000) + 3, 10); // 3-10 coins based on savings
       for (let i = 0; i < burstCount; i++) {
@@ -821,7 +804,6 @@
         calculator.appendChild(burstCoin);
         setTimeout(() => burstCoin.remove(), 1000);
       }
-
       // Play coin clink sound (optional, only on desktop)
       if (window.innerWidth >= 641) {
         const audio = document.getElementById('coin-clink');
@@ -829,7 +811,6 @@
         audio.play().catch(() => console.log('Audio play failed'));
       }
     });
-
     // Survey WhatsApp link update
     document.getElementById('suggestion-input').addEventListener('input', () => {
       const suggestion = document.getElementById('suggestion-input').value.trim();
@@ -837,7 +818,6 @@
       const encodedSuggestion = encodeURIComponent(`My suggestion for JODO: ${suggestion}`);
       whatsappLink.href = `https://wa.me/918500742671?text=${encodedSuggestion}`;
     });
-
     // Prevent scroll jump on input focus
     document.querySelectorAll('.survey-input, .calc-input').forEach(input => {
       input.addEventListener('focus', () => {

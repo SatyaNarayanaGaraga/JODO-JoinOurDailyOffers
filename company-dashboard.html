@@ -1,0 +1,932 @@
+<!-- company-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JODO - Company Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #1a4731, #2f855a, #e6f0ea);
+      color: #2d3748;
+      font-size: 1rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #68d391;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      max-width: 1300px;
+      margin: 3rem auto;
+      box-shadow: 0 15px 40px rgba(104, 211, 145, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(104, 211, 145, 0.2) 0%, transparent 70%);
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+    .dashboard-input {
+      padding: 0.75rem;
+      border: 1px solid #68d391;
+      border-radius: 0.5rem;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+    }
+    .dashboard-input:focus {
+      border-color: #38a169;
+      box-shadow: 0 0 0 4px rgba(104, 211, 145, 0.4);
+      outline: none;
+      background: #ffffff;
+    }
+    .action-btn {
+      background: linear-gradient(135deg, #38a169, #2f855a);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(47, 133, 90, 0.4);
+      background: linear-gradient(135deg, #2f855a, #1a4731);
+    }
+    .action-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+    }
+    .action-btn:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    .delete-btn {
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .delete-btn:hover {
+      background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+      transform: translateY(-2px);
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 0.75rem;
+      margin-top: 2rem;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      background: rgba(240, 255, 244, 0.9);
+      border-radius: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    th {
+      background: linear-gradient(135deg, #68d391, #38a169);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    tr:hover td {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(104, 211, 145, 0.2);
+    }
+    td img {
+      max-width: 60px;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+    }
+    .modal-content {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 10% auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .modal.active .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .modal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #38a169;
+      transition: color 0.3s ease;
+    }
+    .close-btn:hover {
+      color: #1a4731;
+    }
+    .unique-divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, #68d391, transparent);
+      margin: 3rem 0;
+      position: relative;
+    }
+    .unique-divider::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2368d391"%3E%3Cpath d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2Z"/%3E%3C/svg%3E') center no-repeat;
+      background-size: 20px;
+      transform: translateX(-50%);
+    }
+    @media (max-width: 640px) {
+      body { font-size: 0.875rem; }
+      .dashboard-card { padding: 1.5rem; margin: 1.5rem; }
+      .action-btn { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
+      .delete-btn { padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+      th, td { padding: 0.75rem; font-size: 0.875rem; }
+      td img { max-width: 40px; }
+      .modal-content { max-width: 95%; padding: 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .flex-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body class="min-h-screen py-12 px-4">
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal active">
+    <div class="modal-content relative">
+      <span class="close-btn">&times;</span>
+      <h3 class="text-2xl font-bold mb-6 text-center text-2f855a">Company Login</h3>
+      <input type="password" id="company-password" placeholder="Enter company password" class="dashboard-input mb-6">
+      <button id="auth-submit" class="action-btn w-full">Login</button>
+    </div>
+  </div>
+
+  <!-- Company Dashboard -->
+  <div id="company-dashboard" class="dashboard-card hidden">
+    <h3 class="text-3xl font-bold mb-8 text-center text-2f855a">JODO Company Dashboard</h3>
+    <div class="flex flex-col sm:flex-row gap-6 mb-8 justify-center">
+      <button id="add-group-btn" class="action-btn">Add Group</button>
+      <button id="add-member-btn" class="action-btn">Add Member</button>
+      <button id="add-product-btn" class="action-btn">Add Product</button>
+      <button id="export-data-btn" class="action-btn">Export Data</button>
+      <input type="file" id="import-data" accept=".json" style="display: none;">
+      <button id="import-data-btn" class="action-btn">Import Data</button>
+    </div>
+    <div class="unique-divider"></div>
+    <div class="overflow-x-auto mb-8">
+      <h4 class="text-xl font-bold mb-4 text-center text-2f855a">Products</h4>
+      <table id="product-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Farmer Price (₹/kg)</th>
+            <th>Logistics Price (₹/kg)</th>
+            <th>Retail Price (₹/kg)</th>
+            <th>JODO %</th>
+            <th>Group Profit (₹/kg)</th>
+            <th>Leader %</th>
+            <th>Member %</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="unique-divider"></div>
+    <div class="overflow-x-auto mb-8">
+      <h4 class="text-xl font-bold mb-4 text-center text-2f855a">Groups</h4>
+      <table id="group-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Leader</th>
+            <th>Leader Phone</th>
+            <th>Total Orders (kg)</th>
+            <th>Group Profit (₹)</th>
+            <th>Leader Earnings (₹)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="unique-divider"></div>
+    <div class="overflow-x-auto">
+      <h4 class="text-xl font-bold mb-4 text-center text-2f855a">Members</h4>
+      <table id="member-table">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Phone</th>
+            <th>Orders (kg)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal for Forms -->
+  <div id="form-modal" class="modal">
+    <div class="modal-content relative">
+      <span class="close-btn">&times;</span>
+      <div id="form-content"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+    let data = JSON.parse(localStorage.getItem('jodoData')) || { groups: [], products: [] };
+    const COMPANY_PASSWORD = 'jodo2025';
+
+    function saveData() {
+      localStorage.setItem('jodoData', JSON.stringify(data));
+    }
+
+    function showToast(message, type = 'info') {
+      Toastify({
+        text: message,
+        duration: 3000,
+        gravity: 'top',
+        position: 'right',
+        backgroundColor: type === 'error' ? '#ef4444' : '#68d391',
+      }).showToast();
+    }
+
+    function showModal(content) {
+      const modal = document.getElementById('form-modal');
+      document.getElementById('form-content').innerHTML = content;
+      modal.classList.add('active');
+      modal.querySelector('.close-btn').onclick = () => modal.classList.remove('active');
+    }
+
+    function isValidPhone(phone) {
+      return /^\d{10}$/.test(phone);
+    }
+
+    function isUniquePhone(phone, excludeGi = -1, excludeMi = -1) {
+      for (let gi = 0; gi < data.groups.length; gi++) {
+        if (data.groups[gi].leaderPhone === phone && gi !== excludeGi) return false;
+        for (let mi = 0; mi < data.groups[gi].members.length; mi++) {
+          if (data.groups[gi].members[mi].phone === phone && (gi !== excludeGi || mi !== excludeMi)) return false;
+        }
+      }
+      return true;
+    }
+
+    function calculateGroupMetrics(group) {
+      group.totalOrders = group.members.reduce((sum, member) => sum + (member.active ? member.orders.reduce((s, o) => s + o.quantity, 0) : 0), 0);
+      group.groupProfit = group.members.reduce((sum, member) => {
+        if (!member.active) return sum;
+        return sum + member.orders.reduce((s, order) => {
+          const product = data.products.find(p => p.id === order.productId);
+          return s + order.quantity * (product ? product.groupProfitPerKg : 0);
+        }, 0);
+      }, 0);
+      group.leaderEarnings = group.members.reduce((sum, member) => {
+        if (!member.active) return sum;
+        return sum + member.orders.reduce((s, order) => {
+          const product = data.products.find(p => p.id === order.productId);
+          return s + order.quantity * (product ? product.groupProfitPerKg * (product.leaderPercent / 100) : 0);
+        }, 0);
+      }, 0);
+      group.memberShare = group.members.reduce((sum, member) => {
+        if (!member.active) return sum;
+        return sum + member.orders.reduce((s, order) => {
+          const product = data.products.find(p => p.id === order.productId);
+          return s + order.quantity * (product ? product.groupProfitPerKg * (product.memberPercent / 100) : 0);
+        }, 0);
+      }, 0);
+      group.members.forEach(member => {
+        if (!member.active) return;
+        member.savings = member.type === 'family' ? member.orders.reduce((sum, order) => {
+          const product = data.products.find(p => p.id === order.productId);
+          if (!product) return sum;
+          const jodoPrice = product.farmerPrice + product.logisticsPrice + (product.farmerPrice + product.logisticsPrice) * (product.jodoPercent / 100) + product.groupProfitPerKg;
+          const savingsPerKg = product.retailPrice - jodoPrice;
+          return sum + order.quantity * savingsPerKg;
+        }, 0) : 0;
+        member.earnings = member.type === 'farmer' ? member.orders.reduce((sum, order) => {
+          const product = data.products.find(p => p.id === order.productId);
+          return sum + order.quantity * (product ? product.farmerPrice : 0);
+        }, 0) : 0;
+        member.profitShare = group.memberShare * (member.contribution / group.pool);
+        member.engagementScore = member.orderHistory.length * 10;
+        if (member.engagementScore >= 30 && !member.badges.includes('Frequent Buyer')) {
+          member.badges.push('Frequent Buyer');
+        }
+      });
+      group.pool = group.members.reduce((sum, member) => sum + (member.active ? member.contribution : 0), 0) || 1;
+    }
+
+    function renderTables() {
+      const productTable = document.querySelector('#product-table tbody');
+      const groupTable = document.querySelector('#group-table tbody');
+      const memberTable = document.querySelector('#member-table tbody');
+      productTable.innerHTML = '';
+      groupTable.innerHTML = '';
+      memberTable.innerHTML = '';
+      data.products.forEach((product, pi) => {
+        productTable.innerHTML += `
+          <tr>
+            <td><img src="${product.photo || ''}" alt="${product.name}" onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='"></td>
+            <td>${product.name}</td>
+            <td>${product.farmerPrice}</td>
+            <td>${product.logisticsPrice}</td>
+            <td>${product.retailPrice}</td>
+            <td>${product.jodoPercent}%</td>
+            <td>${product.groupProfitPerKg}</td>
+            <td>${product.leaderPercent}%</td>
+            <td>${product.memberPercent}%</td>
+            <td>
+              <button class="action-btn edit-product" data-pi="${pi}">Edit</button>
+              <button class="delete-btn delete-product" data-pi="${pi}">Delete</button>
+            </td>
+          </tr>
+        `;
+      });
+      data.groups.forEach((group, gi) => {
+        calculateGroupMetrics(group);
+        groupTable.innerHTML += `
+          <tr>
+            <td>${group.name}</td>
+            <td>${group.location}</td>
+            <td>${group.leader}</td>
+            <td>${group.leaderPhone || ''}</td>
+            <td>${group.totalOrders}</td>
+            <td>${Math.round(group.groupProfit)}</td>
+            <td>${Math.round(group.leaderEarnings)}</td>
+            <td>
+              <button class="action-btn edit-group" data-gi="${gi}">Edit</button>
+              <button class="delete-btn delete-group" data-gi="${gi}">Delete</button>
+            </td>
+          </tr>
+        `;
+        group.members.forEach((member, mi) => {
+          memberTable.innerHTML += `
+            <tr>
+              <td>${group.name}</td>
+              <td>${member.name}</td>
+              <td>${member.type}</td>
+              <td>${member.phone || ''}</td>
+              <td>${member.orders.reduce((sum, o) => sum + o.quantity, 0)}</td>
+              <td>
+                <button class="action-btn edit-member" data-gi="${gi}" data-mi="${mi}">Edit</button>
+                <button class="delete-btn delete-member" data-gi="${gi}" data-mi="${mi}">Delete</button>
+              </td>
+            </tr>
+          `;
+        });
+      });
+    }
+
+    // Auth
+    document.getElementById('auth-submit').addEventListener('click', () => {
+      const password = document.getElementById('company-password').value;
+      if (password === COMPANY_PASSWORD) {
+        document.getElementById('auth-modal').classList.remove('active');
+        document.getElementById('company-dashboard').classList.remove('hidden');
+        renderTables();
+      } else {
+        showToast('Invalid password.', 'error');
+      }
+    });
+
+    // Add Group
+    document.getElementById('add-group-btn').addEventListener('click', () => {
+      showModal(`
+        <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Add Group</h3>
+        <div class="mb-6">
+          <input type="text" id="group-name" placeholder="Group Name" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="text" id="group-location" placeholder="Location" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="text" id="leader-name" placeholder="Leader Name" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="tel" id="leader-phone" placeholder="Leader Phone (10 digits)" pattern="[0-9]{10}" class="dashboard-input">
+        </div>
+        <button id="submit-group" class="action-btn w-full">Add Group</button>
+      `);
+      document.getElementById('submit-group').addEventListener('click', () => {
+        const name = document.getElementById('group-name').value.trim();
+        const location = document.getElementById('group-location').value.trim();
+        const leader = document.getElementById('leader-name').value.trim();
+        const leaderPhone = document.getElementById('leader-phone').value.trim();
+        if (!name || !location || !leader || !leaderPhone) {
+          showToast('Please fill all fields.', 'error');
+          return;
+        }
+        if (!isValidPhone(leaderPhone)) {
+          showToast('Invalid phone number. Must be 10 digits.', 'error');
+          return;
+        }
+        if (!isUniquePhone(leaderPhone)) {
+          showToast('Phone number already in use.', 'error');
+          return;
+        }
+        data.groups.push({ 
+          name, 
+          location, 
+          leader, 
+          leaderPhone, 
+          members: [], 
+          totalOrders: 0, 
+          groupProfit: 0, 
+          leaderEarnings: 0, 
+          memberShare: 0, 
+          pool: 1 
+        });
+        saveData();
+        renderTables();
+        document.getElementById('form-modal').classList.remove('active');
+        showToast(`Group ${name} added successfully!`);
+      });
+    });
+
+    // Add Member
+    document.getElementById('add-member-btn').addEventListener('click', () => {
+      const groupOptions = data.groups.map((g, gi) => `<option value="${gi}">${g.name}</option>`).join('');
+      if (groupOptions === '') {
+        showToast('No groups available. Add a group first.', 'error');
+        return;
+      }
+      showModal(`
+        <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Add Member</h3>
+        <div class="mb-6">
+          <select id="group-select" class="dashboard-input">
+            <option value="">Select Group</option>
+            ${groupOptions}
+          </select>
+        </div>
+        <div class="mb-6">
+          <input type="text" id="member-name" placeholder="Member Name" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <select id="member-type" class="dashboard-input">
+            <option value="">Select Type</option>
+            <option value="farmer">Farmer</option>
+            <option value="family">Family</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <input type="tel" id="member-phone" placeholder="Member Phone (10 digits)" pattern="[0-9]{10}" class="dashboard-input">
+        </div>
+        <button id="submit-member" class="action-btn w-full">Add Member</button>
+      `);
+      document.getElementById('submit-member').addEventListener('click', () => {
+        const gi = parseInt(document.getElementById('group-select').value);
+        const name = document.getElementById('member-name').value.trim();
+        const type = document.getElementById('member-type').value;
+        const phone = document.getElementById('member-phone').value.trim();
+        if (isNaN(gi) || !name || !type || !phone) {
+          showToast('Please fill all fields.', 'error');
+          return;
+        }
+        if (!isValidPhone(phone)) {
+          showToast('Invalid phone number. Must be 10 digits.', 'error');
+          return;
+        }
+        if (!isUniquePhone(phone, gi)) {
+          showToast('Phone number already in use.', 'error');
+          return;
+        }
+        const member = {
+          name,
+          type,
+          phone,
+          active: true,
+          contribution: 100,
+          orders: [],
+          earnings: 0,
+          savings: 0,
+          profitShare: 0,
+          engagementScore: 0,
+          badges: [],
+          orderHistory: [],
+          contributionHistory: [{ date: new Date().toISOString().split('T')[0], amount: 100 }]
+        };
+        data.groups[gi].members.push(member);
+        saveData();
+        renderTables();
+        document.getElementById('form-modal').classList.remove('active');
+        showToast(`Member ${name} added successfully!`);
+      });
+    });
+
+    // Add Product
+    document.getElementById('add-product-btn').addEventListener('click', () => {
+      showModal(`
+        <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Add Product</h3>
+        <div class="mb-6">
+          <input type="text" id="product-name" placeholder="Product Name" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="farmer-price" placeholder="Farmer Price (₹/kg, default 39)" min="0" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="logistics-price" placeholder="Logistics Price (₹/kg, default 4)" min="0" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="retail-price" placeholder="Retail Price (₹/kg, default 60)" min="0" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="jodo-percent" placeholder="JODO % (default 3.5)" min="0" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="group-profit-per-kg" placeholder="Group Profit (₹/kg, default 5)" min="0" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="leader-percent" placeholder="Leader % (default 20)" min="0" max="100" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="number" id="member-percent" placeholder="Member % (default 70)" min="0" max="100" class="dashboard-input">
+        </div>
+        <div class="mb-6">
+          <input type="file" id="product-photo" accept="image/*" class="dashboard-input">
+        </div>
+        <button id="submit-product" class="action-btn w-full">Add Product</button>
+      `);
+      document.getElementById('submit-product').addEventListener('click', () => {
+        const name = document.getElementById('product-name').value.trim();
+        const farmerPrice = parseFloat(document.getElementById('farmer-price').value) || 39;
+        const logisticsPrice = parseFloat(document.getElementById('logistics-price').value) || 4;
+        const retailPrice = parseFloat(document.getElementById('retail-price').value) || 60;
+        const jodoPercent = parseFloat(document.getElementById('jodo-percent').value) || 3.5;
+        const groupProfitPerKg = parseFloat(document.getElementById('group-profit-per-kg').value) || 5;
+        const leaderPercent = parseFloat(document.getElementById('leader-percent').value) || 20;
+        const memberPercent = parseFloat(document.getElementById('member-percent').value) || 70;
+        const photoInput = document.getElementById('product-photo');
+
+        if (!name) {
+          showToast('Please enter product name.', 'error');
+          return;
+        }
+        if (leaderPercent + memberPercent > 100) {
+          showToast('Leader % + Member % must not exceed 100.', 'error');
+          return;
+        }
+        if (retailPrice <= farmerPrice + logisticsPrice) {
+          showToast('Retail price must be higher than farmer + logistics price.', 'error');
+          return;
+        }
+
+        const product = { 
+          id: Date.now(), 
+          name, 
+          farmerPrice, 
+          logisticsPrice, 
+          retailPrice,
+          jodoPercent, 
+          groupProfitPerKg, 
+          leaderPercent, 
+          memberPercent,
+          photo: null 
+        };
+
+        if (photoInput.files && photoInput.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            product.photo = e.target.result;
+            data.products.push(product);
+            saveData();
+            renderTables();
+            document.getElementById('form-modal').classList.remove('active');
+            showToast(`Product ${name} added successfully!`);
+          };
+          reader.readAsDataURL(photoInput.files[0]);
+        } else {
+          data.products.push(product);
+          saveData();
+          renderTables();
+          document.getElementById('form-modal').classList.remove('active');
+          showToast(`Product ${name} added successfully!`);
+        }
+      });
+    });
+
+    // Edit/Delete Actions
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-product')) {
+        const pi = parseInt(e.target.dataset.pi);
+        if (isNaN(pi) || pi < 0 || pi >= data.products.length) {
+          showToast('Invalid product.', 'error');
+          return;
+        }
+        const product = data.products[pi];
+        showModal(`
+          <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Edit Product</h3>
+          <img src="${product.photo || ''}" alt="${product.name}" class="w-full h-32 object-cover mb-6 rounded-lg">
+          <div class="mb-6">
+            <input type="text" id="product-name" value="${product.name}" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="farmer-price" value="${product.farmerPrice}" min="0" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="logistics-price" value="${product.logisticsPrice}" min="0" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="retail-price" value="${product.retailPrice}" min="0" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="jodo-percent" value="${product.jodoPercent}" min="0" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="group-profit-per-kg" value="${product.groupProfitPerKg}" min="0" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="leader-percent" value="${product.leaderPercent}" min="0" max="100" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="number" id="member-percent" value="${product.memberPercent}" min="0" max="100" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="file" id="product-photo" accept="image/*" class="dashboard-input">
+          </div>
+          <button id="submit-edit-product" data-pi="${pi}" class="action-btn w-full">Save Changes</button>
+        `);
+        document.getElementById('submit-edit-product').addEventListener('click', () => {
+          const name = document.getElementById('product-name').value.trim();
+          const farmerPrice = parseFloat(document.getElementById('farmer-price').value) || 39;
+          const logisticsPrice = parseFloat(document.getElementById('logistics-price').value) || 4;
+          const retailPrice = parseFloat(document.getElementById('retail-price').value) || 60;
+          const jodoPercent = parseFloat(document.getElementById('jodo-percent').value) || 3.5;
+          const groupProfitPerKg = parseFloat(document.getElementById('group-profit-per-kg').value) || 5;
+          const leaderPercent = parseFloat(document.getElementById('leader-percent').value) || 20;
+          const memberPercent = parseFloat(document.getElementById('member-percent').value) || 70;
+          const photoInput = document.getElementById('product-photo');
+
+          if (!name) {
+            showToast('Please enter product name.', 'error');
+            return;
+          }
+          if (leaderPercent + memberPercent > 100) {
+            showToast('Leader % + Member % must not exceed 100.', 'error');
+            return;
+          }
+          if (retailPrice <= farmerPrice + logisticsPrice) {
+            showToast('Retail price must be higher than farmer + logistics price.', 'error');
+            return;
+          }
+
+          const updatedProduct = { ...product, name, farmerPrice, logisticsPrice, retailPrice, jodoPercent, groupProfitPerKg, leaderPercent, memberPercent };
+
+          if (photoInput.files && photoInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              updatedProduct.photo = e.target.result;
+              data.products[pi] = updatedProduct;
+              saveData();
+              renderTables();
+              document.getElementById('form-modal').classList.remove('active');
+              showToast(`Product ${name} updated successfully!`);
+            };
+            reader.readAsDataURL(photoInput.files[0]);
+          } else {
+            data.products[pi] = updatedProduct;
+            saveData();
+            renderTables();
+            document.getElementById('form-modal').classList.remove('active');
+            showToast(`Product ${name} updated successfully!`);
+          }
+        });
+      } else if (e.target.classList.contains('delete-product')) {
+        const pi = parseInt(e.target.dataset.pi);
+        if (isNaN(pi) || pi < 0 || pi >= data.products.length) {
+          showToast('Invalid product.', 'error');
+          return;
+        }
+        const productName = data.products[pi].name;
+        if (confirm(`Are you sure you want to delete product "${productName}"? This will remove it from all orders.`)) {
+          // Remove product from all orders
+          data.groups.forEach(group => {
+            group.members.forEach(member => {
+              member.orders = member.orders.filter(o => o.productId !== data.products[pi].id);
+              member.orderHistory = member.orderHistory.filter(oh => oh.product !== productName);
+            });
+          });
+          data.products.splice(pi, 1);
+          saveData();
+          renderTables();
+          showToast(`Product ${productName} deleted successfully!`);
+        }
+      } else if (e.target.classList.contains('edit-group')) {
+        const gi = parseInt(e.target.dataset.gi);
+        if (isNaN(gi) || gi < 0 || gi >= data.groups.length) {
+          showToast('Invalid group.', 'error');
+          return;
+        }
+        const group = data.groups[gi];
+        showModal(`
+          <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Edit Group</h3>
+          <div class="mb-6">
+            <input type="text" id="group-name" value="${group.name}" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="text" id="group-location" value="${group.location}" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="text" id="leader-name" value="${group.leader}" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <input type="tel" id="leader-phone" value="${group.leaderPhone || ''}" pattern="[0-9]{10}" class="dashboard-input">
+          </div>
+          <button id="submit-edit-group" data-gi="${gi}" class="action-btn w-full">Save Changes</button>
+        `);
+        document.getElementById('submit-edit-group').addEventListener('click', () => {
+          const name = document.getElementById('group-name').value.trim();
+          const location = document.getElementById('group-location').value.trim();
+          const leader = document.getElementById('leader-name').value.trim();
+          const leaderPhone = document.getElementById('leader-phone').value.trim();
+          if (!name || !location || !leader || !leaderPhone) {
+            showToast('Please fill all fields.', 'error');
+            return;
+          }
+          if (!isValidPhone(leaderPhone)) {
+            showToast('Invalid phone number. Must be 10 digits.', 'error');
+            return;
+          }
+          if (!isUniquePhone(leaderPhone, gi)) {
+            showToast('Phone number already in use.', 'error');
+            return;
+          }
+          data.groups[gi] = { ...group, name, location, leader, leaderPhone };
+          saveData();
+          renderTables();
+          document.getElementById('form-modal').classList.remove('active');
+          showToast(`Group ${name} updated successfully!`);
+        });
+      } else if (e.target.classList.contains('delete-group')) {
+        const gi = parseInt(e.target.dataset.gi);
+        if (isNaN(gi) || gi < 0 || gi >= data.groups.length) {
+          showToast('Invalid group.', 'error');
+          return;
+        }
+        const groupName = data.groups[gi].name;
+        if (confirm(`Are you sure you want to delete group "${groupName}" and all its members?`)) {
+          data.groups.splice(gi, 1);
+          saveData();
+          renderTables();
+          showToast(`Group ${groupName} deleted successfully!`);
+        }
+      } else if (e.target.classList.contains('edit-member')) {
+        const gi = parseInt(e.target.dataset.gi);
+        const mi = parseInt(e.target.dataset.mi);
+        if (isNaN(gi) || isNaN(mi) || gi < 0 || gi >= data.groups.length || mi < 0 || mi >= data.groups[gi].members.length) {
+          showToast('Invalid member.', 'error');
+          return;
+        }
+        const member = data.groups[gi].members[mi];
+        showModal(`
+          <h3 class="text-xl font-bold mb-6 text-center text-2f855a">Edit Member</h3>
+          <div class="mb-6">
+            <input type="text" id="member-name" value="${member.name}" class="dashboard-input">
+          </div>
+          <div class="mb-6">
+            <select id="member-type" class="dashboard-input">
+              <option value="farmer" ${member.type === 'farmer' ? 'selected' : ''}>Farmer</option>
+              <option value="family" ${member.type === 'family' ? 'selected' : ''}>Family</option>
+            </select>
+          </div>
+          <div class="mb-6">
+            <input type="tel" id="member-phone" value="${member.phone || ''}" pattern="[0-9]{10}" class="dashboard-input">
+          </div>
+          <button id="submit-edit-member" data-gi="${gi}" data-mi="${mi}" class="action-btn w-full">Save Changes</button>
+        `);
+        document.getElementById('submit-edit-member').addEventListener('click', () => {
+          const name = document.getElementById('member-name').value.trim();
+          const type = document.getElementById('member-type').value;
+          const phone = document.getElementById('member-phone').value.trim();
+          if (!name || !type || !phone) {
+            showToast('Please fill all fields.', 'error');
+            return;
+          }
+          if (!isValidPhone(phone)) {
+            showToast('Invalid phone number. Must be 10 digits.', 'error');
+            return;
+          }
+          if (!isUniquePhone(phone, gi, mi)) {
+            showToast('Phone number already in use.', 'error');
+            return;
+          }
+          data.groups[gi].members[mi] = { ...member, name, type, phone };
+          saveData();
+          renderTables();
+          document.getElementById('form-modal').classList.remove('active');
+          showToast(`Member ${name} updated successfully!`);
+        });
+      } else if (e.target.classList.contains('delete-member')) {
+        const gi = parseInt(e.target.dataset.gi);
+        const mi = parseInt(e.target.dataset.mi);
+        if (isNaN(gi) || isNaN(mi) || gi < 0 || gi >= data.groups.length || mi < 0 || mi >= data.groups[gi].members.length) {
+          showToast('Invalid member.', 'error');
+          return;
+        }
+        const memberName = data.groups[gi].members[mi].name;
+        if (confirm(`Are you sure you want to delete member "${memberName}"?`)) {
+          data.groups[gi].members.splice(mi, 1);
+          saveData();
+          renderTables();
+          showToast(`Member ${memberName} deleted successfully!`);
+        }
+      }
+    });
+
+    // Export Data
+    document.getElementById('export-data-btn').addEventListener('click', () => {
+      const json = JSON.stringify(data);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'jodo-data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Data exported successfully!');
+    });
+
+    // Import Data
+    document.getElementById('import-data-btn').addEventListener('click', () => {
+      document.getElementById('import-data').click();
+    });
+    document.getElementById('import-data').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            data = JSON.parse(ev.target.result);
+            saveData();
+            renderTables();
+            showToast('Data imported successfully!');
+          } catch {
+            showToast('Invalid data file.', 'error');
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    // Initial Render
+    renderTables();
+  </script>
+</body>
+</html>
