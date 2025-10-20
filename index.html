@@ -8,9 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; overflow-anchor: auto; font-size: 1rem; }
+    body { font-family: 'Poppins', sans-serif; line-height: 1.6; background: #f8faf5; color: #2d3748; }
     .highlight { color: #f6ad55; font-weight: 700; }
-    .hero { background: linear-gradient(135deg, #2f855a, #68d391); display: flex; align-items: center; justify-content: center; }
+    .hero { background: linear-gradient(135deg, #2f855a, #68d391); }
     .sticky-nav { position: sticky; top: 0; z-index: 1000; background: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .sticky-nav a.active { color: #68d391; border-bottom: 2px solid #68d391; }
     .card, .solution-card, .impact-card, .join-card, .calc-card, .price-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background: #ffffff; border: 1px solid #e6f0ea; }
@@ -18,463 +18,74 @@
     .step-number { background: #f6ad55; color: #ffffff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
     .price-arrow { color: #2f855a; font-size: 2rem; font-weight: bold; transition: transform 0.3s ease; }
     .price-arrow:hover { transform: scale(1.2); }
-    .solution-card { position: relative; overflow: hidden; background: linear-gradient(145deg, #e53e3e, #7f1d1d); border-radius: 1rem; }
+    .solution-card { background: linear-gradient(145deg, #e53e3e, #7f1d1d); border-radius: 1rem; }
     .solution-card.green { background: linear-gradient(145deg, #68d391, #1a4731); }
     .solution-card h3 { font-family: 'Georgia', serif; }
-    .chain-icon { font-size: 2rem; display: inline-block; animation: pulseFade 2s infinite; }
-    .glow-icon { font-size: 2rem; display: inline-block; animation: glowIcon 2s infinite; }
-    .jagged-path { animation: shake 0.6s infinite; stroke: #f56565; }
-    .jagged-path:hover { stroke: #f56565; }
-    .vine-path { stroke: #38a169; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growVine 3s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(104, 211, 145, 0.7)); }
-    .vine-path:hover { stroke: #38a169; }
+    .chain-icon, .glow-icon { font-size: 2rem; animation: pulseFade 2s infinite; }
+    .vine-path { stroke: #38a169; stroke-dasharray: 200; stroke-dashoffset: 200; animation: growVine 3s ease-in-out infinite; }
     .coin, .leaf, .sparkle { position: absolute; animation-iteration-count: infinite; pointer-events: none; }
-    .coin {
-      background: #f6ad55;
-      border-radius: 50%;
-      box-shadow: 0 0 6px rgba(246, 173, 85, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5);
-      transform-origin: center;
-    }
-    .coin.silver { background: #d1d5db; box-shadow: 0 0 6px rgba(209, 213, 219, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.5); }
-    .leaf {
-      width: 12px;
-      height: 12px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat;
-      animation: floatLeaf 6s infinite;
-    }
-    .sparkle {
-      width: 6px;
-      height: 6px;
-      background: #f6e05e;
-      border-radius: 50%;
-      opacity: 0;
-      animation: sparkle 1.5s infinite ease-in-out;
-    }
-    .coin:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-    .coin:nth-child(2) { top: 40%; left: 50%; animation-delay: 1s; }
-    .leaf:nth-child(1) { top: 15%; left: 70%; animation-delay: 0s; }
-    .leaf:nth-child(2) { top: 50%; left: 30%; animation-delay: 2s; }
+    .coin { background: #f6ad55; border-radius: 50%; box-shadow: 0 0 6px rgba(246, 173, 85, 0.6); }
+    .coin.silver { background: #d1d5db; box-shadow: 0 0 6px rgba(209, 213, 219, 0.6); }
+    .leaf { width: 12px; height: 12px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6 0C3.8 0 2 2.2 2 4.5c0 2.8 3.5 7.5 4 7.5s4-4.7 4-7.5C10 2.2 8.2 0 6 0z" fill="%232f855a"/></svg>') no-repeat; animation: floatLeaf 6s infinite; }
+    .sparkle { width: 6px; height: 6px; background: #f6e05e; border-radius: 50%; opacity: 0; animation: sparkle 1.5s infinite ease-in-out; }
     @keyframes pulseFade { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
-    @keyframes glowIcon { 0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 3px rgba(104, 211, 145, 0.5)); } 50% { transform: scale(1.2) rotate(10deg); filter: drop-shadow(0 0 8px rgba(104, 211, 145, 0.8)); } }
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(3deg); } 75% { transform: translateX(3px) rotate(-3deg); } }
     @keyframes growVine { 0%, 100% { stroke-dashoffset: 200; } 50% { stroke-dashoffset: 0; } }
-    @keyframes fadeCoinForOtherSections { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 0.8; transform: translateY(-15px); } }
     @keyframes floatLeaf { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(45deg); } }
-    @keyframes sparkle {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 0.8; transform: scale(1.2); }
-      100% { opacity: 0; transform: scale(0.5); }
-    }
-    /* Calculator Styles */
-    .calculator {
-      background: #ffffff;
-      border: 2px solid #68d391;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%);
-      animation: glowPulse 6s ease-in-out infinite;
-    }
+    @keyframes sparkle { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 0.8; transform: scale(1.2); } 100% { opacity: 0; transform: scale(0.5); } }
+    .calculator { background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%); }
     .calc-result { background: #f0fff4; border-left: 4px solid #68d391; }
-    .coin-stack {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 20px;
-      transition: height 0.5s ease;
-    }
-    /* Realistic Coin Physics for Calculator Section */
-    #calculator .coin {
-      animation: fallCoin 3.5s infinite ease-in-out;
-    }
-    #calculator .coin:nth-child(1) { width: 16px; height: 16px; top: -30px; left: 15%; animation: fallCoin1 3.8s infinite ease-in-out; animation-delay: 0s; }
-    #calculator .coin:nth-child(2) { width: 12px; height: 12px; top: -30px; left: 35%; animation: fallCoin2 3.2s infinite ease-in-out; animation-delay: 0.6s; }
-    #calculator .coin:nth-child(3) { width: 14px; height: 14px; top: -30px; left: 55%; animation: fallCoin3 4s infinite ease-in-out; animation-delay: 1.2s; }
-    #calculator .coin:nth-child(4) { width: 10px; height: 10px; top: -30px; left: 75%; animation: fallCoin4 3.6s infinite ease-in-out; animation-delay: 1.8s; class: silver; }
-    #calculator .coin:nth-child(5) { width: 13px; height: 13px; top: -30px; left: 95%; animation: fallCoin5 3.4s infinite ease-in-out; animation-delay: 2.4s; class: silver; }
-    #calculator .coin:nth-child(6) { width: 15px; height: 15px; top: -30px; left: 25%; animation: fallCoin6 3.9s infinite ease-in-out; animation-delay: 0.3s; }
-    #calculator .sparkle:nth-child(7) { top: 50px; left: 20%; animation-delay: 0.2s; }
-    #calculator .sparkle:nth-child(8) { top: 150px; left: 40%; animation-delay: 0.8s; }
-    #calculator .sparkle:nth-child(9) { top: 250px; left: 60%; animation-delay: 1.4s; }
-    @keyframes fallCoin1 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(15px) rotate(360deg); opacity: 0.9; }
-      75% { transform: translateY(450px) translateX(12px) rotate(400deg); opacity: 0.7; }
-      100% { transform: translateY(480px) translateX(10px) rotate(420deg); opacity: 0; }
-    }
-    @keyframes fallCoin2 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(-20px) rotate(-300deg); opacity: 0.85; }
-      75% { transform: translateY(430px) translateX(-15px) rotate(-340deg); opacity: 0.65; }
-      100% { transform: translateY(460px) translateX(-12px) rotate(-360deg); opacity: 0; }
-    }
-    @keyframes fallCoin3 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(10px) rotate(450deg); opacity: 0.95; }
-      75% { transform: translateY(460px) translateX(8px) rotate(480deg); opacity: 0.75; }
-      100% { transform: translateY(500px) translateX(6px) rotate(500deg); opacity: 0; }
-    }
-    @keyframes fallCoin4 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(-10px) rotate(-270deg); opacity: 0.9; }
-      75% { transform: translateY(440px) translateX(-8px) rotate(-300deg); opacity: 0.7; }
-      100% { transform: translateY(470px) translateX(-6px) rotate(-320deg); opacity: 0; }
-    }
-    @keyframes fallCoin5 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(18px) rotate(330deg); opacity: 0.8; }
-      75% { transform: translateY(450px) translateX(15px) rotate(360deg); opacity: 0.6; }
-      100% { transform: translateY(490px) translateX(12px) rotate(380deg); opacity: 0; }
-    }
-    @keyframes fallCoin6 {
-      0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
-      50% { transform: translateY(400px) translateX(-12px) rotate(-390deg); opacity: 0.88; }
-      75% { transform: translateY(460px) translateX(-10px) rotate(-420deg); opacity: 0.68; }
-      100% { transform: translateY(510px) translateX(-8px) rotate(-450deg); opacity: 0; }
-    }
-    @keyframes glowPulse {
-      0% { background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%); }
-      50% { background: linear-gradient(180deg, #e6f0ea 0%, #f0fff4 100%); }
-      100% { background: linear-gradient(180deg, #f0fff4 0%, #e6f0ea 100%); }
-    }
-    /* Interactive Burst Coins */
-    #calculator .burst-coin {
-      width: 12px;
-      height: 12px;
-      background: #f6ad55;
-      border-radius: 50%;
-      box-shadow: 0 0 6px rgba(246, 173, 85, 0.6);
-      position: absolute;
-      animation: burstCoin 1s ease-out forwards;
-    }
-    @keyframes burstCoin {
-      0% { transform: translateY(0) translateX(0) scale(0); opacity: 1; }
-      100% { transform: translateY(-50px) translateX(calc(50px * var(--direction))) scale(0.5); opacity: 0; }
-    }
-    /* Apply fadeCoin animation to coins in other sections */
-    #solution .coin, #how .coin { animation: fadeCoinForOtherSections 5s infinite; }
-    /* Section Backgrounds */
-    .section-bg-offwhite { background: #f8faf5; }
-    .section-bg-pale { background: #f0fff4; }
-    /* Button Styles */
+    .coin-stack { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 60px; height: 20px; transition: height 0.5s ease; }
+    #calculator .coin { animation: fallCoin 3.5s infinite ease-in-out; }
+    @keyframes fallCoin { 0% { transform: translateY(-30px) rotate(0deg); opacity: 0; } 50% { transform: translateY(400px) rotate(360deg); opacity: 0.9; } 100% { transform: translateY(480px) rotate(420deg); opacity: 0; } }
     .btn { background: #68d391; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 9999px; }
     .btn:hover { background: #38a169; }
-    /* Input Styles */
-    .survey-input, .calc-input { width: 100%; padding: 0.75rem; border: 1px solid #e6f0ea; border-radius: 0.5rem; font-size: 1rem; }
+    .survey-input, .calc-input { width: 100%; padding: 0.75rem; border: 1px solid #e6f0ea; border-radius: 0.5rem; }
     .survey-input:focus, .calc-input:focus { outline: none; border-color: #68d391; box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.2); }
-    /* Headings */
     h2, h3 { color: #2f855a; }
-    /* Enhanced Realistic Crack Physics for "The Broken System" Section */
-    #problem {
-      position: relative;
-      overflow: hidden;
-      background: #f8faf5 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 10L10 15L15 5L20 20L25 5L30 25L35 5L40 15L45 25L50 5L55 20L60 5L65 15L70 25L75 5L80 20L85 5L90 15L95 25L100 5" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/><path d="M0 50L5 55L10 45L15 60L20 45L25 65L30 45L35 55L40 65L45 45L50 60L55 45L60 55L65 65L70 45L75 60L80 45L85 55L90 65L95 45L100 60" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/><path d="M0 90L10 95L15 85L20 100L25 85L30 95L35 85L40 90L45 100L50 85L55 95L60 85L65 90L70 100L75 85L80 95L85 85L90 90L95 100L100 85" fill="none" stroke="%23e53e3e" stroke-width="0.6" opacity="0.4"/></svg>') repeat;
-      background-size: 150% 150%;
-      animation: crackShift 10s ease-in-out infinite alternate;
-    }
-    #problem::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0L5 10L10 5L15 15L20 0L25 20L30 5L35 10L40 20L45 5L50 15L55 0L60 10L65 20L70 5L75 15L80 0L85 10L90 20L95 5L100 15" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M0 30L10 35L15 25L20 40L25 25L30 35L35 25L40 30L45 40L50 25L55 35L60 25L65 30L70 40L75 25L80 35L85 25L90 30L95 40L100 25" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M0 60L5 65L10 55L15 70L20 55L25 75L30 55L35 65L40 75L45 55L50 70L55 55L60 65L65 75L70 55L75 70L80 55L85 65L90 75L95 55L100 70" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/></svg>') repeat;
-      background-size: 200% 200%;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.2;
-      animation: crackPulse 8s ease-in-out infinite alternate;
-    }
-    #problem::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(229, 62, 62, 0.05), transparent);
-      pointer-events: none;
-      z-index: 1;
-      animation: crackGlow 6s ease-in-out infinite alternate;
-    }
-    #problem .problem-cards .card {
-      position: relative;
-      overflow: hidden;
-      border: 2px solid #e53e3e;
-      border-style: dashed;
-      background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 10L30 30L50 10L70 30L90 10" fill="none" stroke="%23e53e3e" stroke-width="1" opacity="0.2"/><path d="M10 50L30 70L50 50L70 70L90 50" fill="none" stroke="%23e53e3e" stroke-width="1" opacity="0.2"/></svg>') repeat;
-      background-size: 50% 50%;
-    }
-    #problem .problem-cards .card::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      background: radial-gradient(circle, transparent 30%, rgba(229, 62, 62, 0.15) 70%);
-      transform: rotate(10deg);
-      pointer-events: none;
-      animation: shatterSpread 3s ease-in-out infinite;
-    }
-    #problem .problem-cards .card::after {
-      content: '💔';
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.2rem;
-      opacity: 0.5;
-      animation: crackJitter 1.2s ease-in-out infinite;
-    }
-    #problem .price-flow .price-card {
-      position: relative;
-      border: 2px dashed #e53e3e;
-      background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M5 5L15 15L25 5L35 15L45 5" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/><path d="M5 25L15 35L25 25L35 35L45 25" fill="none" stroke="%23e53e3e" stroke-width="0.8" opacity="0.3"/></svg>') repeat;
-      background-size: 40% 40%;
-    }
-    #problem .price-flow .price-card:nth-child(5)::before {
-      content: '💸';
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.8rem;
-      opacity: 0.6;
-      animation: breakLoss 1.5s ease-in-out infinite;
-    }
-    #problem .price-flow .price-card:nth-child(5)::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(229, 62, 62, 0.2), transparent 70%);
-      pointer-events: none;
-      animation: crackRipple 2.5s ease-in-out infinite;
-    }
-    /* Debris Particles for Realism */
-    #problem .debris {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #e53e3e;
-      border-radius: 50%;
-      opacity: 0.4;
-      z-index: 2;
-      pointer-events: none;
-    }
-    #problem .debris:nth-child(1) { top: 20%; left: 15%; animation: debrisFloat 4s ease-in-out infinite; }
-    #problem .debris:nth-child(2) { top: 50%; left: 40%; animation: debrisFloat 5s ease-in-out infinite 0.5s; }
-    #problem .debris:nth-child(3) { top: 70%; left: 60%; animation: debrisFloat 4.5s ease-in-out infinite 1s; }
-    #problem .debris:nth-child(4) { top: 30%; left: 80%; animation: debrisFloat 3.5s ease-in-out infinite 1.5s; }
-    /* Animations for Crack Physics */
-    @keyframes crackShift {
-      0% { background-position: 0 0; }
-      100% { background-position: 10% 10%; }
-    }
-    @keyframes crackPulse {
-      0% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(1.02); }
-      100% { opacity: 0.2; transform: scale(1); }
-    }
-    @keyframes crackGlow {
-      0% { opacity: 0.05; }
-      50% { opacity: 0.15; }
-      100% { opacity: 0.05; }
-    }
-    @keyframes shatterSpread {
-      0% { transform: rotate(10deg) translate(0, 0); opacity: 0.15; }
-      50% { transform: rotate(12deg) translate(5px, 5px); opacity: 0.25; }
-      100% { transform: rotate(10deg) translate(0, 0); opacity: 0.15; }
-    }
-    @keyframes crackJitter {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(-2px, 2px) rotate(5deg); }
-      75% { transform: translate(2px, -2px) rotate(-5deg); }
-    }
-    @keyframes breakLoss {
-      0%, 100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.3); opacity: 0.8; }
-    }
-    @keyframes crackRipple {
-      0% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(1.1); }
-      100% { opacity: 0.2; transform: scale(1); }
-    }
-    @keyframes debrisFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-      50% { transform: translateY(-10px) rotate(20deg); opacity: 0.6; }
-    }
-    /* New Animations for "How JODO Works" Section */
-    #how {
-      position: relative;
-      overflow: hidden;
-    }
-    .step-number {
-      animation: glowIcon 2s infinite;
-    }
-    .step-icon {
-      font-size: 2rem;
-      margin-right: 0.5rem;
-      display: inline-block;
-      animation: iconBounce 1.5s infinite ease-in-out;
-    }
-    @keyframes iconBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .step {
-      opacity: 0;
-      animation: stepReveal 1s ease-out forwards;
-    }
-    .step:nth-child(1) { animation-delay: 0.2s; }
-    .step:nth-child(2) { animation-delay: 0.4s; }
-    .step:nth-child(3) { animation-delay: 0.6s; }
-    .step:nth-child(4) { animation-delay: 0.8s; }
-    .step:nth-child(5) { animation-delay: 1.0s; }
-    .step:nth-child(6) { animation-delay: 1.2s; }
-    @keyframes stepReveal {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    #how .coin:nth-child(odd) { animation: fadeCoinForOtherSections 5s infinite; }
-    #how .leaf:nth-child(even) { animation: floatLeaf 7s infinite; }
-    /* Connecting Vines Between Steps */
-    .steps-container {
-      position: relative;
-    }
-    .vine-connector {
-      position: absolute;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0;
-      animation: vineGrow 2s ease-in-out forwards;
-    }
-    .vine-connector path {
-      stroke: #38a169;
-      stroke-width: 3;
-      fill: none;
-      stroke-dasharray: 300;
-      stroke-dashoffset: 300;
-      animation: growVine 2.5s ease-in-out forwards;
-      filter: drop-shadow(0 0 3px rgba(104, 211, 145, 0.5));
-    }
-    .vine-connector:nth-child(2) { animation-delay: 0.4s; }
-    .vine-connector:nth-child(3) { animation-delay: 0.8s; }
-    .vine-connector:nth-child(4) { animation-delay: 1.2s; }
-    .vine-connector:nth-child(5) { animation-delay: 1.6s; }
-    .vine-connector:nth-child(6) { animation-delay: 2.0s; }
-    @keyframes vineGrow {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    /* Mobile-specific adjustments */
+    /* Mobile Adjustments */
     @media (max-width: 640px) {
-      body { font-size: 0.875rem; }
       .hero { flex-direction: column; padding: 2rem 1rem; }
-      .hero-content { max-w: 100%; }
       .hero-content h1 { font-size: 2rem; }
-      .hero-content p { font-size: 0.875rem; }
       .hero-cta { flex-direction: column; gap: 0.5rem; }
-      .sticky-nav { padding: 0.5rem 0; }
-      .sticky-nav ul { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-      .sticky-nav a { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+      .sticky-nav ul { flex-wrap: wrap; gap: 0.5rem; }
+      .sticky-nav a { font-size: 0.75rem; }
       .section { padding: 2rem 0.75rem; }
-      .section h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-      .problem-cards, .solution-comparison, .impact-cards, .join-cards, .price-flow { flex-direction: column; gap: 0.5rem; }
-      .card, .solution-card, .impact-card, .join-card, .calc-card, .price-card { padding: 1rem; max-width: 100%; }
-      .price-flow div { font-size: 0.875rem; }
-      .price-flow span { font-size: 0.75rem; }
-      .price-arrow, .chain-icon, .glow-icon, .jagged-path, .vine-path { font-size: 1.5rem; width: 150px; height: 40px; }
-      .steps-container { gap: 1rem; flex-direction: column; align-items: center; }
-      .step { flex-direction: row; gap: 0.5rem; max-width: 100%; }
-      .step-number { width: 24px; height: 24px; font-size: 0.875rem; }
-      .step-content h3 { font-size: 1rem; }
-      .step-content p { font-size: 0.875rem; }
-      .calculator { padding: 1rem; }
-      .calc-input, .survey-input { font-size: 0.875rem; padding: 0.5rem; }
-      .calc-result { padding: 0.75rem; }
-      .calc-result h3 { font-size: 1rem; }
-      .calc-result p { font-size: 0.875rem; }
-      .survey-cta { flex-direction: column; gap: 0.5rem; }
-      .btn { font-size: 0.875rem; padding: 0.75rem 1.5rem; }
-      .footer { padding: 1.5rem 0.75rem; }
-      .footer p, .footer a { font-size: 0.75rem; }
-      .social-links { gap: 0.5rem; }
+      .price-flow { 
+        flex-direction: row; 
+        align-items: center; 
+        gap: 1rem; 
+        overflow-x: auto; 
+        padding: 0.5rem; 
+        justify-content: flex-start;
+      }
+      .price-arrow { 
+        font-size: 1.5rem; 
+        transform: none; /* Keep arrows horizontal */
+      }
+      .price-card { 
+        width: 120px; 
+        min-width: 120px; 
+        padding: 1rem; 
+        text-align: center;
+      }
+      .price-card span.text-3xl { font-size: 1.5rem; }
+      .price-card span.text-sm { font-size: 0.75rem; }
       .coin, .leaf, .sparkle { display: none; }
-      [data-aos] { opacity: 1 !important; transform: none !important; }
-      /* Adjusted Crack Effect for Mobile */
-      #problem {
-        background-size: 300% 300%;
-      }
-      #problem::before {
-        background-size: 400% 400%;
-        animation-duration: 12s;
-      }
-      #problem .debris {
-        width: 4px;
-        height: 4px;
-      }
-      #problem .problem-cards .card::after,
-      #problem .price-flow .price-card:nth-child(5)::before {
-        font-size: 1rem;
-      }
-      /* Adjusted Vine Connectors for Mobile */
-      .vine-connector {
-        display: none;
-      }
-      /* Simplified Coin Physics for Mobile */
-      #calculator .coin:nth-child(n+4) { display: none; }
-      #calculator .coin { width: 10px; height: 10px; }
-      #calculator .coin:nth-child(1) { animation: fallCoinMobile 3s infinite ease-in-out; }
-      #calculator .coin:nth-child(2) { animation: fallCoinMobile 2.8s infinite ease-in-out; animation-delay: 0.4s; }
-      #calculator .coin:nth-child(3) { animation: fallCoinMobile 3.2s infinite ease-in-out; animation-delay: 0.8s; }
-      #calculator .coin-stack { width: 40px; height: 15px; }
-      @keyframes fallCoinMobile {
-        0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
-        50% { transform: translateY(300px) translateX(5px) rotate(120deg); opacity: 0.8; }
-        75% { transform: translateY(320px) translateX(4px) rotate(140deg); opacity: 0.6; }
-        100% { transform: translateY(350px) translateX(3px) rotate(160deg); opacity: 0; }
-      }
-      #calculator .burst-coin { width: 8px; height: 8px; }
-      @keyframes burstCoin {
-        0% { transform: translateY(0) translateX(0) scale(0); opacity: 1; }
-        100% { transform: translateY(-30px) translateX(calc(30px * var(--direction))) scale(0.5); opacity: 0; }
-      }
-    }
-    /* Desktop-specific Vine Positioning */
-    @media (min-width: 641px) {
-      .vine-connector-1-2 { top: 150px; left: 30%; width: 200px; height: 100px; }
-      .vine-connector-2-3 { top: 300px; left: 30%; width: 200px; height: 100px; }
-      .vine-connector-3-4 { top: 150px; left: 60%; width: 200px; height: 100px; }
-      .vine-connector-4-5 { top: 300px; left: 60%; width: 200px; height: 100px; }
-      .vine-connector-5-6 { top: 450px; left: 45%; width: 200px; height: 100px; }
-      /* Leaf Particles in Calculator */
-      #calculator .leaf:nth-child(10) { top: 20%; left: 10%; animation: floatLeafUp 5s infinite ease-in-out; }
-      #calculator .leaf:nth-child(11) { top: 40%; left: 80%; animation: floatLeafUp 6s infinite ease-in-out 0.5s; }
-      @keyframes floatLeafUp {
-        0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-        50% { transform: translateY(-30px) rotate(30deg); opacity: 0.8; }
-      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
   <header class="hero flex flex-col items-center justify-center px-4 py-12 text-white sm:py-16" data-aos="fade-up">
     <div class="hero-content text-center max-w-lg sm:max-w-2xl">
-      <h1 class="text-3xl font-bold mb-4 sm:text-5xl sm:mb-6">Join the <span class="highlight">JODO</span> Movement</h1>
-      <p class="text-base mb-6 sm:text-xl sm:mb-8">Transform India's food system & earn by empowering your community</p>
-      <div class="hero-cta flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 sm:justify-center">
+      <h1 class="text-3xl font-bold mb-4 sm:text-5xl">Join the <span class="highlight">JODO</span> Movement</h1>
+      <p class="text-base mb-6 sm:text-xl">Transform India's food system & earn by empowering your community</p>
+      <div class="hero-cta flex flex-col gap-3 sm:flex-row sm:gap-4">
         <a href="#join" class="btn font-semibold">Join Waitlist</a>
         <a href="https://wa.me/918500742671" class="btn font-semibold" target="_blank">Call Our Team</a>
         <a href="group-management.html" class="btn font-semibold">Group Management</a>
       </div>
     </div>
   </header>
-  <!-- Sticky Navigation -->
   <nav class="sticky-nav py-3 bg-white sm:py-4">
     <ul class="flex justify-center gap-4 text-base font-semibold sm:gap-10 sm:text-lg">
       <li><a href="#problem" class="text-gray-700 hover:text-green-500">Problem</a></li>
@@ -485,173 +96,98 @@
       <li><a href="#join" class="text-gray-700 hover:text-green-500">Join</a></li>
     </ul>
   </nav>
-  <!-- Problem Section -->
-  <section id="problem" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <div class="debris"></div><div class="debris"></div><div class="debris"></div><div class="debris"></div>
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12 relative z-10">The Broken System</h2>
-    <div class="problem-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6 relative z-10">
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        🌾 <strong>10 Million Farmers</strong> earn barely 25% of retail price & remain trapped in debt.
-      </div>
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        💰 <strong>4 Middlemen</strong> take most of the value — adding zero contribution.
-      </div>
-      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3× and get days-old vegetables.
-      </div>
+  <section id="problem" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl">The Current System</h2>
+    <div class="problem-cards flex flex-col gap-4 sm:flex-row sm:gap-6">
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">🌾 <strong>10 Million Farmers</strong> earn barely 25% of retail price.</div>
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">💰 <strong>4 Middlemen</strong> take most of the value.</div>
+      <div class="card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">👨‍👩‍👧‍👦 <strong>50 Million Families</strong> overpay 3×.</div>
     </div>
-    <div class="price-flow flex flex-col justify-center items-center gap-4 mt-10 font-semibold text-base sm:flex-row sm:gap-6 sm:mt-12 sm:text-lg overflow-x-auto scroll-smooth relative z-10">
-      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="100">
+    <div class="price-flow flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 sm:gap-6 sm:mt-12">
+      <div class="price-card p-5 rounded-xl shadow-lg w-full max-w-[160px]" data-aos="fade-up">
         <span class="text-3xl font-bold text-green-600">₹15/kg</span><br>
-        <span class="text-sm font-normal text-gray-600">What farmers get 😢</span>
+        <span class="text-sm text-gray-600">What farmers get</span>
       </div>
-      <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="150">→</div>
-      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="200">
+      <div class="price-arrow sm:text-3xl" data-aos="fade-up">→</div>
+      <div class="price-card p-5 rounded-xl shadow-lg w-full max-w-[160px]" data-aos="fade-up">
         <span class="text-3xl font-bold text-blue-600">₹60/kg</span><br>
-        <span class="text-sm font-normal text-gray-600">What families pay 💸</span>
+        <span class="text-sm text-gray-600">What families pay</span>
       </div>
-      <div class="price-arrow text-2xl sm:text-3xl text-gray-500" data-aos="fade-up" data-aos-delay="250">→</div>
-      <div class="price-card p-5 rounded-xl shadow-lg w-[160px] min-w-[150px]" data-aos="fade-up" data-aos-delay="300">
+      <div class="price-arrow sm:text-3xl" data-aos="fade-up">→</div>
+      <div class="price-card p-5 rounded-xl shadow-lg w-full max-w-[160px]" data-aos="fade-up">
         <span class="text-3xl font-bold text-orange-600">₹45/kg</span><br>
-        <span class="text-sm font-normal text-gray-600">Lost to middlemen 😡</span>
+        <span class="text-sm text-gray-600">Middlemen margin</span>
       </div>
     </div>
   </section>
-  <!-- Solution Section -->
-  <section id="solution" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
-    <div class="coin"></div><div class="coin"></div>
-    <div class="leaf"></div><div class="leaf"></div>
-    <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8 font-georgia">The <span class="highlight">JODO Solution</span></h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">Empowering farmers & communities</p>
-    <div class="solution-comparison flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="solution-card p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="zoom-out">
-        <h3 class="text-lg font-semibold text-white mb-3 sm:text-xl sm:mb-4">❌ Without JODO</h3>
-        <svg class="jagged-path mx-auto mb-3" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 25L50 40L90 10L130 40L170 10L190 25" stroke="#e53e3e" stroke-width="4"/>
-        </svg>
-        <div class="flex justify-center gap-2 mb-3 sm:gap-4">
-          <span class="chain-icon">🌾😢</span>
-          <span class="chain-icon">💰😡</span>
-          <span class="chain-icon">👨‍👩‍👧‍👦😡</span>
-        </div>
-        <p class="text-sm sm:text-base text-white">Farmer: ₹15/kg</p>
-        <p class="text-sm sm:text-base text-white">Middlemen: ₹35/kg</p>
-        <p class="text-sm sm:text-base text-white">Family: ₹50/kg</p>
+  <section id="solution" class="section bg-green-50 py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-6 sm:text-4xl">The <span class="highlight">JODO Solution</span></h2>
+    <div class="solution-comparison flex flex-col gap-4 sm:flex-row sm:gap-6">
+      <div class="solution-card p-5 rounded-lg shadow-lg w-full max-w-md" data-aos="zoom-out">
+        <h3 class="text-lg font-semibold text-white mb-3">Traditional System</h3>
+        <svg class="vine-path mx-auto mb-3" width="200" height="50"><path d="M10 25C50 40 150 10 190 25" stroke="#e53e3e" stroke-width="4"/></svg>
+        <p class="text-sm text-white">Farmer: ₹15/kg</p>
+        <p class="text-sm text-white">Middlemen: ₹35/kg</p>
+        <p class="text-sm text-white">Family: ₹50/kg</p>
       </div>
-      <div class="solution-card green p-5 rounded-lg shadow-lg w-full max-w-md sm:p-6" data-aos="zoom-in">
-        <h3 class="text-lg font-semibold text-white mb-3 sm:text-xl sm:mb-4">✅ With JODO</h3>
-        <svg class="vine-path mx-auto mb-3" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 25C50 10 150 40 190 25" stroke="#2f855a" stroke-width="4"/>
-        </svg>
-        <div class="flex justify-center gap-2 mb-3 sm:gap-4">
-          <span class="glow-icon">🌾😊</span>
-          <span class="glow-icon">👨‍👩‍👧‍👦💚</span>
-          <span class="glow-icon">👥💰</span>
-        </div>
-        <p class="text-sm sm:text-base text-white">Farmer: ₹25/kg</p>
-        <p class="text-sm sm:text-base text-white">JODO + Logistics: ₹10/kg</p>
-        <p class="text-sm sm:text-base text-white">Families: 35/Kg</p>
+      <div class="solution-card green p-5 rounded-lg shadow-lg w-full max-w-md" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold text-white mb-3">With JODO</h3>
+        <svg class="vine-path mx-auto mb-3" width="200" height="50"><path d="M10 25C50 10 150 40 190 25" stroke="#2f855a" stroke-width="4"/></svg>
+        <p class="text-sm text-white">Farmer: ₹25/kg</p>
+        <p class="text-sm text-white">JODO + Logistics: ₹10/kg</p>
+        <p class="text-sm text-white">Families: ₹35/kg</p>
       </div>
     </div>
   </section>
-  <!-- How It Works Section -->
-  <section id="how" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
-    <div class="coin"></div><div class="coin"></div>
-    <div class="leaf"></div><div class="leaf"></div>
-    <div class="coin"></div><div class="leaf"></div>
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">How <span class="highlight">JODO Works</span></h2>
-    <div class="steps-container flex flex-col gap-6 justify-center max-w-4xl mx-auto sm:gap-8 sm:flex-row sm:flex-wrap">
-      <svg class="vine-connector vine-connector-1-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
-      </svg>
-      <svg class="vine-connector vine-connector-2-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
-      </svg>
-      <svg class="vine-connector vine-connector-3-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
-      </svg>
-      <svg class="vine-connector vine-connector-4-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
-      </svg>
-      <svg class="vine-connector vine-connector-5-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-        <path d="M0 80 C 50 20, 150 20, 200 80" stroke="#38a169" stroke-width="3" fill="none"/>
-      </svg>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="100">
+  <section id="how" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl">How <span class="highlight">JODO Works</span></h2>
+    <div class="steps-container flex flex-col gap-6 max-w-4xl mx-auto sm:flex-row sm:flex-wrap">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-right">
         <div class="step-number">1️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">👥</span>
-          <h3 class="text-base font-semibold sm:text-lg">Community Formation</h3>
-          <p class="text-sm sm:text-base">
-            Each JODO Group covers a <span class="highlight">50–100 meter radius</span> — about 100 nearby families.
-            Each contributes ₹100, creating a <strong>₹10,000 local working capital</strong>.
-            👉 A self-funded, trust-based community economy.
-          </p>
+          <h3 class="text-base font-semibold">Community Formation</h3>
+          <p class="text-sm">Each JODO Group covers 100 families, contributing ₹100 each for ₹10,000 working capital.</p>
         </div>
       </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="200">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-right">
         <div class="step-number">2️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">🧑‍💼</span>
-          <h3 class="text-base font-semibold sm:text-lg">Community Leader</h3>
-          <p class="text-sm sm:text-base">
-            A trusted resident becomes the <strong>Community Leader</strong> — managing orders, communication, and pickups.
-            💰 Earns <strong>₹15K–₹20K/month</strong> by growing the group’s active families.
-          </p>
+          <h3 class="text-base font-semibold">Community Leader</h3>
+          <p class="text-sm">A leader manages orders and earns ₹15K–₹20K/month.</p>
         </div>
       </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-right" data-aos-delay="300">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-right">
         <div class="step-number">3️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">📱</span>
-          <h3 class="text-base font-semibold sm:text-lg">Weekly Ordering</h3>
-          <p class="text-sm sm:text-base">
-            Families place orders via <strong>App or WhatsApp</strong>.
-            Orders are aggregated and finalized <strong>48 hours in advance</strong> for zero-waste procurement.
-          </p>
+          <h3 class="text-base font-semibold">Weekly Ordering</h3>
+          <p class="text-sm">Families order via app or WhatsApp, finalized 48 hours in advance.</p>
         </div>
       </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="100">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-left">
         <div class="step-number">4️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">🌾</span>
-          <h3 class="text-base font-semibold sm:text-lg">Direct Farmer Connection</h3>
-          <p class="text-sm sm:text-base">
-            JODO connects directly with farmers and pays them <strong>100% within 24 hours of harvest</strong>.
-            Ensuring fair prices and faster cash flow to the roots of India’s food chain.
-          </p>
+          <h3 class="text-base font-semibold">Direct Farmer Connection</h3>
+          <p class="text-sm">JODO pays farmers 100% within 24 hours of harvest.</p>
         </div>
       </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="200">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-left">
         <div class="step-number">5️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">🚚</span>
-          <h3 class="text-base font-semibold sm:text-lg">Bulk Delivery</h3>
-          <p class="text-sm sm:text-base">
-            A single bulk load (~500 kg) is delivered to the <strong>community’s pickup point</strong>,
-            cutting last-mile delivery costs and reducing waste.
-          </p>
+          <h3 class="text-base font-semibold">Bulk Delivery</h3>
+          <p class="text-sm">Single bulk delivery to community pickup point reduces costs.</p>
         </div>
       </div>
-      <div class="step flex items-start gap-3 w-full max-w-sm sm:gap-4" data-aos="fade-left" data-aos-delay="300">
+      <div class="step flex items-start gap-3 w-full max-w-sm" data-aos="fade-left">
         <div class="step-number">6️⃣</div>
         <div class="step-content text-left">
-          <span class="step-icon">🛒</span>
-          <h3 class="text-base font-semibold sm:text-lg">Family Pickup & Refill</h3>
-          <p class="text-sm sm:text-base">
-            Each family walks 50–100 meters to collect their order, pay locally,
-            and <strong>refill the working capital</strong> — keeping the JODO cycle continuously revolving.
-          </p>
+          <h3 class="text-base font-semibold">Family Pickup & Refill</h3>
+          <p class="text-sm">Families collect orders and refill working capital.</p>
         </div>
       </div>
     </div>
   </section>
-  <!-- Calculator Section with Enhanced Coin Animations -->
-  <section id="calculator" class="section section-bg-pale py-12 px-4 text-center sm:py-16 relative" data-aos="fade-up">
-    <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin silver"></div><div class="coin silver"></div><div class="coin"></div>
-    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
-    <div class="leaf"></div><div class="leaf"></div>
-    <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Calculate Your JODO Savings 💰</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">Enter your monthly vegetable spend to see how much you can save with JODO!</p>
+  <section id="calculator" class="section bg-green-50 py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-6 sm:text-4xl">Calculate Your JODO Savings 💰</h2>
     <div class="calc-card calculator p-6 rounded-lg shadow-lg max-w-md mx-auto" data-aos="zoom-in">
       <div class="mb-4">
         <label for="monthly-spend" class="block text-left text-sm font-semibold mb-2">Monthly Vegetable Spend (₹)</label>
@@ -659,7 +195,7 @@
       </div>
       <button id="calc-submit" class="btn font-semibold w-full mb-4">Calculate Savings</button>
       <div id="calc-result" class="calc-result p-4 rounded-lg hidden">
-        <h3 class="text-xl font-bold text-green-800 mb-2">Your Monthly Savings with JODO</h3>
+        <h3 class="text-xl font-bold text-green-800 mb-2">Your Monthly Savings</h3>
         <p class="text-3xl font-bold text-green-600 mb-1" id="savings-amount">₹0</p>
         <p class="text-sm text-green-700" id="savings-percent">0% savings</p>
       </div>
@@ -670,162 +206,88 @@
       </svg>
     </div>
   </section>
-  <!-- Survey Section -->
-  <section id="survey" class="section section-bg-offwhite py-12 px-4 text-center rounded-2xl sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-6 sm:text-4xl sm:mb-8">Give Your Suggestion 💡</h2>
-    <p class="text-base mb-6 sm:text-lg sm:mb-8">We'd love to hear your feedback! Share your suggestion via WhatsApp.</p>
+  <section id="survey" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-6 sm:text-4xl">Give Your Suggestion 💡</h2>
     <div class="max-w-md mx-auto">
       <div class="mb-4">
         <input type="text" id="suggestion-input" placeholder="Enter your suggestion" class="survey-input">
       </div>
-      <div class="survey-cta flex justify-center">
-        <a id="whatsapp-suggestion" href="https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20" target="_blank" class="btn font-semibold text-sm sm:text-base">Share via WhatsApp</a>
+      <div class="survey-cta">
+        <a id="whatsapp-suggestion" href="https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20" target="_blank" class="btn font-semibold">Share via WhatsApp</a>
       </div>
     </div>
   </section>
-  <!-- Impact Section -->
-  <section id="impact" class="section section-bg-pale py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">The Impact</h2>
-    <div class="impact-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👨‍🌾 Farmers</h3>
-        <p class="text-sm sm:text-base"><strong>5x Income Increase</strong> → ₹15,237/week</p>
+  <section id="impact" class="section bg-green-50 py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl">The Impact</h2>
+    <div class="impact-cards flex flex-col gap-4 sm:flex-row sm:gap-6">
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">👨‍🌾 <strong>Farmers</strong>: 5x Income Increase → ₹15,237/week</div>
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">👨‍👩‍👧‍👦 <strong>Families</strong>: Save 30% → ₹5,500/month</div>
+      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">👥 <strong>Leaders</strong>: Earn ₹20K/month</div>
+    </div>
+  </section>
+  <section id="join" class="section py-12 px-4 text-center sm:py-16" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-8 sm:text-4xl">Join the <span class="highlight">JODO Movement</span></h2>
+    <div class="join-cards flex flex-col gap-4 sm:flex-row sm:gap-6">
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold mb-3">For Families</h3>
+        <p class="text-sm">Save 30% on groceries.</p>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20join%20as%20a%20family" target="_blank" class="btn font-semibold mt-4">Join Waitlist</a>
       </div>
-      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👨‍👩‍👧‍👦 Families</h3>
-        <p class="text-sm sm:text-base"><strong>Save 30%</strong> → ₹5,500/month, farm-fresh vegetables</p>
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold mb-3">For Farmers</h3>
+        <p class="text-sm">Earn 5x more.</p>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20partner%20as%20a%20farmer" target="_blank" class="btn font-semibold mt-4">Partner With Us</a>
       </div>
-      <div class="impact-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">👥 Community Leaders</h3>
-        <p class="text-sm sm:text-base">Earn <strong>₹20K/month</strong>, flexible work, meaningful service</p>
+      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold mb-3">Become a Leader</h3>
+        <p class="text-sm">Earn ₹15-20K/month.</p>
+        <a href="https://wa.me/918500742671?text=I%20want%20to%20apply%20as%20a%20leader" target="_blank" class="btn font-semibold mt-4">Apply Now</a>
       </div>
     </div>
   </section>
-  <!-- Join Section -->
-  <section id="join" class="section section-bg-offwhite py-12 px-4 text-center sm:py-16" data-aos="fade-up">
-    <h2 class="text-2xl font-bold mb-8 sm:text-4xl sm:mb-12">Join the <span class="highlight">JODO Movement</span></h2>
-    <div class="join-cards flex flex-col gap-4 justify-center sm:flex-row sm:gap-6">
-      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="100">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Families</h3>
-        <p class="text-sm sm:text-base">Save 30% on groceries. Get farm-fresh vegetables.</p>
-        <a href="https://wa.me/918500742671?text=I%20want%20to%20join%20the%20JODO%20waitlist%20as%20a%20family%20to%20save%20on%20groceries%20and%20get%20farm-fresh%20vegetables." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Join Waitlist</a>
-      </div>
-      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="200">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">For Farmers</h3>
-        <p class="text-sm sm:text-base">Earn 5x more. Get guaranteed payment.</p>
-        <a href="https://wa.me/918500742671?text=I%E2%80%99m%20a%20farmer%20interested%20in%20partnering%20with%20JODO%20to%20earn%20more%20and%20get%20guaranteed%20payments." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Partner With Us</a>
-      </div>
-      <div class="join-card p-5 rounded-lg shadow-lg w-full max-w-sm sm:p-6" data-aos="zoom-in" data-aos-delay="300">
-        <h3 class="text-lg font-semibold mb-3 sm:text-xl sm:mb-4">Become a Leader</h3>
-        <p class="text-sm sm:text-base">Earn ₹15-20K/month from a ₹500 community investment.</p>
-        <a href="https://wa.me/918500742671?text=I%20want%20to%20apply%20as%20a%20JODO%20community%20leader%20to%20earn%20%E2%82%B915-20K/month." target="_blank" class="btn font-semibold mt-4 inline-block text-sm sm:text-base">Apply Now</a>
-      </div>
-    </div>
-  </section>
-  <!-- Footer -->
   <footer class="bg-green-800 text-white py-8 px-4 text-center" data-aos="fade-up">
-    <p class="mb-2 text-sm sm:text-base">📧 Email: <a href="mailto:contact@jodo.in" class="text-orange-400 hover:text-orange-300">contact@jodo.in</a></p>
-    <p class="mb-2 text-sm sm:text-base">📱 WhatsApp: <a href="https://wa.me/918500742671" target="_blank" class="text-orange-400 hover:text-orange-300">+91 85007 42671</a></p>
+    <p class="mb-2 text-sm">📧 <a href="mailto:contact@jodo.in" class="text-orange-400">contact@jodo.in</a></p>
+    <p class="mb-2 text-sm">📱 <a href="https://wa.me/918500742671" class="text-orange-400">+91 85007 42671</a></p>
     <div class="social-links flex justify-center gap-4 mb-4">
-      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Facebook</a>
-      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Instagram</a>
-      <a href="#" target="_blank" class="text-orange-400 hover:text-orange-300 text-sm sm:text-base">Twitter</a>
+      <a href="#" class="text-orange-400">Facebook</a>
+      <a href="#" class="text-orange-400">Instagram</a>
+      <a href="#" class="text-orange-400">Twitter</a>
     </div>
-    <p class="text-sm sm:text-base">📍 Launching in: Your City</p>
+    <p class="text-sm">📍 Launching in: Your City</p>
   </footer>
-  <!-- Audio for Coin Clink (Optional) -->
-  <audio id="coin-clink" src="https://cdn.pixabay.com/audio/2023/03/20/coin-clink.mp3" preload="auto"></audio>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Initialize AOS with reduced duration and mobile disable
     AOS.init({ duration: 600, once: true, disable: window.innerWidth < 640 });
-    // Smooth scrolling with offset
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          const offset = 60;
-          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
           window.scrollTo({
-            top: elementPosition - offset,
+            top: targetElement.offsetTop - 60,
             behavior: 'smooth'
           });
         }
       });
     });
-    // Active nav link highlighting
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 60) {
-          current = section.getAttribute('id');
-        }
-      });
-      document.querySelectorAll('.sticky-nav a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-    });
-    // Calculator functionality with coin burst and stack
     document.getElementById('calc-submit').addEventListener('click', () => {
       const monthlySpend = parseFloat(document.getElementById('monthly-spend').value);
       const resultDiv = document.getElementById('calc-result');
       const savingsAmount = document.getElementById('savings-amount');
       const savingsPercent = document.getElementById('savings-percent');
-      const coinStack = document.querySelector('.coin-stack');
-      const calculator = document.querySelector('.calculator');
       if (isNaN(monthlySpend) || monthlySpend <= 0) {
-        alert('Please enter a valid monthly spend amount.');
+        alert('Please enter a valid amount.');
         return;
       }
       const savings = monthlySpend * 0.31;
-      const percentage = '31%';
-      const maxStackHeight = 60; // Max height for coin stack in px
-      const stackHeight = Math.min(savings / 100, maxStackHeight); // Scale stack height based on savings
       savingsAmount.textContent = `₹${Math.round(savings)}`;
-      savingsPercent.textContent = `${percentage} savings`;
+      savingsPercent.textContent = '31% savings';
       resultDiv.classList.remove('hidden');
-      coinStack.style.height = `${stackHeight}px`;
-      // Trigger coin burst
-      const burstCount = Math.min(Math.floor(savings / 1000) + 3, 10); // 3-10 coins based on savings
-      for (let i = 0; i < burstCount; i++) {
-        const burstCoin = document.createElement('div');
-        burstCoin.classList.add('burst-coin');
-        burstCoin.style.left = `${50 + (Math.random() - 0.5) * 20}%`;
-        burstCoin.style.top = '50%';
-        burstCoin.style.setProperty('--direction', Math.random() > 0.5 ? 1 : -1);
-        burstCoin.style.animationDelay = `${i * 0.1}s`;
-        calculator.appendChild(burstCoin);
-        setTimeout(() => burstCoin.remove(), 1000);
-      }
-      // Play coin clink sound (optional, only on desktop)
-      if (window.innerWidth >= 641) {
-        const audio = document.getElementById('coin-clink');
-        audio.currentTime = 0;
-        audio.play().catch(() => console.log('Audio play failed'));
-      }
     });
-    // Survey WhatsApp link update
     document.getElementById('suggestion-input').addEventListener('input', () => {
       const suggestion = document.getElementById('suggestion-input').value.trim();
-      const whatsappLink = document.getElementById('whatsapp-suggestion');
-      const encodedSuggestion = encodeURIComponent(`My suggestion for JODO: ${suggestion}`);
-      whatsappLink.href = `https://wa.me/918500742671?text=${encodedSuggestion}`;
-    });
-    // Prevent scroll jump on input focus
-    document.querySelectorAll('.survey-input, .calc-input').forEach(input => {
-      input.addEventListener('focus', () => {
-        const scrollY = window.scrollY;
-        input.addEventListener('blur', () => {
-          window.scrollTo({ top: scrollY, behavior: 'auto' });
-        }, { once: true });
-      });
+      document.getElementById('whatsapp-suggestion').href = `https://wa.me/918500742671?text=My%20suggestion%20for%20JODO:%20${encodeURIComponent(suggestion)}`;
     });
   </script>
 </body>
